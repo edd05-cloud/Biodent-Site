@@ -414,14 +414,251 @@
 
     /* ─── ANIMATIONS ─── */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
+      from { opacity: 0; transform: translateY(40px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    .fade-up { animation: fadeUp 0.8s ease both; }
+    @keyframes fadeLeft {
+      from { opacity: 0; transform: translateX(-40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fadeRight {
+      from { opacity: 0; transform: translateX(40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.88); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes floatY {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(92,138,110,0.4); }
+      50% { box-shadow: 0 0 0 14px rgba(92,138,110,0); }
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    @keyframes rotateSlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes countUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes borderDraw {
+      from { clip-path: inset(0 100% 0 0); }
+      to { clip-path: inset(0 0% 0 0); }
+    }
+    @keyframes navGlow {
+      0%, 100% { box-shadow: 0 2px 20px rgba(92,138,110,0); }
+      50% { box-shadow: 0 2px 20px rgba(92,138,110,0.15); }
+    }
+    @keyframes heroTagSlide {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes badgeSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .fade-up { animation: fadeUp 0.85s cubic-bezier(0.22,1,0.36,1) both; }
+    .fade-left { animation: fadeLeft 0.85s cubic-bezier(0.22,1,0.36,1) both; }
+    .fade-right { animation: fadeRight 0.85s cubic-bezier(0.22,1,0.36,1) both; }
+    .scale-in { animation: scaleIn 0.7s cubic-bezier(0.22,1,0.36,1) both; }
     .delay-1 { animation-delay: 0.1s; }
     .delay-2 { animation-delay: 0.25s; }
     .delay-3 { animation-delay: 0.4s; }
     .delay-4 { animation-delay: 0.55s; }
+    .delay-5 { animation-delay: 0.7s; }
+
+    /* Floating hero badge */
+    .hero-badge { animation: floatY 4s ease-in-out infinite; }
+
+    /* Hero card float delayed */
+    .hero-card { animation: floatY 4s ease-in-out infinite 1.5s; }
+
+    /* CTA pulse */
+    .btn-primary { position: relative; overflow: hidden; }
+    .btn-primary::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      background-size: 200% 100%;
+      animation: shimmer 2.5s infinite;
+      border-radius: inherit;
+    }
+
+    /* Nav active glow */
+    nav.scrolled { animation: navGlow 3s ease-in-out infinite; }
+
+    /* Service card hover lift with glow */
+    .service-card {
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1),
+                  box-shadow 0.4s cubic-bezier(0.22,1,0.36,1),
+                  background 0.3s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 24px 60px rgba(92,138,110,0.18);
+    }
+    .service-card:hover .service-icon {
+      animation: pulseGlow 1.2s ease-in-out infinite;
+      transform: scale(1.12) rotate(-5deg);
+    }
+    .service-icon { transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+
+    /* Team card hover */
+    .team-card { transition: transform 0.3s cubic-bezier(0.22,1,0.36,1); }
+    .team-card:hover { transform: translateY(-8px); }
+    .team-photo {
+      transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1),
+                  box-shadow 0.4s ease;
+    }
+    .team-card:hover .team-photo {
+      transform: scale(1.06);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+    }
+
+    /* Testimonial card hover */
+    .testi-card {
+      transition: transform 0.35s cubic-bezier(0.22,1,0.36,1),
+                  border-color 0.3s ease,
+                  background 0.3s ease;
+    }
+    .testi-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(138,171,150,0.4);
+      background: rgba(255,255,255,0.1);
+    }
+
+    /* Why feature items */
+    .feature-item {
+      transition: transform 0.3s ease;
+      padding: 1rem; border-radius: 12px;
+    }
+    .feature-item:hover { transform: translateX(8px); background: rgba(92,138,110,0.05); }
+    .feature-num { transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+    .feature-item:hover .feature-num { transform: scale(1.2); }
+
+    /* Stat counter animation */
+    .stat-num {
+      display: inline-block;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .hero-stats:hover .stat-num { transform: scale(1.08); }
+
+    /* Nav link underline slide */
+    .nav-links a { position: relative; }
+    .nav-links a::after {
+      content: '';
+      position: absolute; bottom: -4px; left: 0; right: 0;
+      height: 1.5px; background: var(--sage-dark);
+      transform: scaleX(0); transform-origin: right;
+      transition: transform 0.3s cubic-bezier(0.22,1,0.36,1);
+    }
+    .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      opacity: 0.5; animation: fadeUp 1s ease 1.5s both;
+    }
+    .scroll-indicator span {
+      font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--mid);
+    }
+    .scroll-dot {
+      width: 1px; height: 40px; background: var(--mid);
+      position: relative; overflow: hidden;
+    }
+    .scroll-dot::after {
+      content: '';
+      position: absolute; top: -100%; left: 0; right: 0; height: 100%;
+      background: var(--sage-dark);
+      animation: borderDraw 1.4s ease-in-out infinite;
+    }
+
+    /* Section tag animated line */
+    .section-tag::before {
+      transition: width 0.6s cubic-bezier(0.22,1,0.36,1);
+    }
+    .section-tag:hover::before { width: 48px; }
+
+    /* Cursor dot */
+    #cursor-dot {
+      width: 8px; height: 8px;
+      background: var(--sage-dark);
+      border-radius: 50%;
+      position: fixed; pointer-events: none; z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+      mix-blend-mode: multiply;
+    }
+    #cursor-ring {
+      width: 36px; height: 36px;
+      border: 1.5px solid var(--sage-dark);
+      border-radius: 50%;
+      position: fixed; pointer-events: none; z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.18s cubic-bezier(0.22,1,0.36,1),
+                  width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+      opacity: 0.5;
+    }
+    body:hover #cursor-dot { opacity: 1; }
+
+    /* Smooth page-level transitions */
+    section { transition: background 0.5s ease; }
+
+    /* Button ripple */
+    .btn-primary, .btn-outline, .btn-book {
+      position: relative; overflow: hidden;
+    }
+    .ripple {
+      position: absolute; border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      transform: scale(0);
+      animation: rippleAnim 0.6s linear;
+      pointer-events: none;
+    }
+    @keyframes rippleAnim {
+      to { transform: scale(4); opacity: 0; }
+    }
+
+    /* Gradient text for hero */
+    .hero-h1 em {
+      background: linear-gradient(135deg, var(--sage-dark) 0%, #3d9e70 50%, var(--accent) 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 3s linear infinite;
+    }
+
+    /* Active nav link indicator */
+    .nav-links a.active { color: var(--sage-dark); }
+    .nav-links a.active::after { transform: scaleX(1); }
+
+    /* Parallax hero image */
+    .hero-right svg { will-change: transform; }
+
+    /* Why visual floating cards */
+    .why-card.top { animation: floatY 3.5s ease-in-out infinite; }
+    .why-card.bottom { animation: floatY 3.5s ease-in-out infinite 1s; }
+
+    /* Staggered scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1),
+                  transform 0.7s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 1024px) {
@@ -448,6 +685,43 @@
       .footer-grid { grid-template-columns: 1fr; }
     }
 
+    /* ─── LANGUAGE SWITCHER ─── */
+    .lang-switcher {
+      display: flex; align-items: center; gap: 0.4rem;
+      background: var(--bone); border: 1.5px solid var(--bone);
+      border-radius: 40px; padding: 0.42rem 0.9rem;
+      cursor: pointer; font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em;
+      color: var(--charcoal); transition: all 0.25s cubic-bezier(0.22,1,0.36,1);
+      position: relative; overflow: hidden;
+      margin-right: 0.5rem;
+    }
+    .lang-switcher:hover {
+      background: var(--sage-dark); border-color: var(--sage-dark);
+      color: white; transform: scale(1.05);
+    }
+    .lang-flag { font-size: 1rem; line-height: 1; }
+    .lang-label { font-size: 0.74rem; font-weight: 700; letter-spacing: 0.08em; }
+
+    /* Lang transition overlay */
+    #lang-overlay {
+      position: fixed; inset: 0; z-index: 9997;
+      background: var(--cream);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+      display: flex; align-items: center; justify-content: center;
+    }
+    #lang-overlay.show { opacity: 1; pointer-events: all; }
+    .lang-overlay-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem; font-weight: 300;
+      color: var(--sage-dark); opacity: 0;
+      transition: opacity 0.2s ease 0.1s;
+      letter-spacing: 0.04em;
+    }
+    #lang-overlay.show .lang-overlay-text { opacity: 1; }
+
+    /* ─── success message ─── */
     /* success message */
     .success-msg {
       display: none; text-align: center; padding: 2rem;
@@ -460,16 +734,27 @@
 </head>
 <body>
 
+<!-- Language transition overlay -->
+<div id="lang-overlay"><span class="lang-overlay-text" id="langOverlayText"></span></div>
+
+<!-- Custom cursor -->
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">Biodent <span>Dental Clinic</span></a>
   <ul class="nav-links">
-    <li><a href="#services">Services</a></li>
-    <li><a href="#why">About</a></li>
-    <li><a href="#team">Our Team</a></li>
-    <li><a href="#testimonials">Reviews</a></li>
-    <li><a href="#book" class="nav-cta">Book Now</a></li>
+    <li><a href="#services" data-en="Services" data-es="Servicios">Services</a></li>
+    <li><a href="#why" data-en="About" data-es="Nosotros">About</a></li>
+    <li><a href="#team" data-en="Our Team" data-es="Equipo">Our Team</a></li>
+    <li><a href="#testimonials" data-en="Reviews" data-es="Reseñas">Reviews</a></li>
+    <li><a href="#book" class="nav-cta" data-en="Book Now" data-es="Reservar">Book Now</a></li>
   </ul>
+  <button class="lang-switcher" id="langBtn" title="Cambiar idioma / Change language">
+    <span class="lang-flag" id="langFlag">🇬🇧</span>
+    <span class="lang-label" id="langLabel">ES</span>
+  </button>
   <button class="hamburger" id="menuBtn" aria-label="Open menu">
     <span></span><span></span><span></span>
   </button>
@@ -478,39 +763,39 @@
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-close" id="menuClose">✕</button>
-  <a href="#services" class="menu-link">Services</a>
-  <a href="#why" class="menu-link">About</a>
-  <a href="#team" class="menu-link">Our Team</a>
-  <a href="#testimonials" class="menu-link">Reviews</a>
-  <a href="#book" class="menu-link" style="color:var(--sage-dark)">Book Now</a>
+  <a href="#services" class="menu-link" data-en="Services" data-es="Servicios">Services</a>
+  <a href="#why" class="menu-link" data-en="About" data-es="Nosotros">About</a>
+  <a href="#team" class="menu-link" data-en="Our Team" data-es="Equipo">Our Team</a>
+  <a href="#testimonials" class="menu-link" data-en="Reviews" data-es="Reseñas">Reviews</a>
+  <a href="#book" class="menu-link" style="color:var(--sage-dark)" data-en="Book Now" data-es="Reservar">Book Now</a>
 </div>
 
 <!-- HERO -->
 <section id="hero">
   <div class="hero-left">
-    <div class="hero-tag fade-up">Your Smile Deserves the Best</div>
+    <div class="hero-tag fade-up" data-en="Your Smile Deserves the Best" data-es="Tu Sonrisa Merece lo Mejor">Your Smile Deserves the Best</div>
     <h1 class="hero-h1 fade-up delay-1">
-      A Smile<br/>That <em>Lasts</em><br/>A Lifetime
+      <span data-en="A Smile" data-es="Una Sonrisa">A Smile</span><br/>That <em data-en="Lasts" data-es="Dura">Lasts</em><br/><span data-en="A Lifetime" data-es="Toda la Vida">A Lifetime</span>
     </h1>
     <p class="hero-sub fade-up delay-2">
-      Premium dental care in a calm, welcoming environment. From routine cleanings to complete smile makeovers — we're here for every step of your journey.
+      <span data-en="Premium dental care in a calm, welcoming environment. From routine cleanings to complete smile makeovers — we're here for every step of your journey." data-es="Atención dental premium en un ambiente tranquilo y acogedor. Desde limpiezas de rutina hasta transformaciones completas de sonrisa — estamos aquí en cada paso de tu camino.">Premium dental care in a calm, welcoming environment. From routine cleanings to complete smile makeovers — we're here for every step of your journey.</span>
     </p>
     <div class="hero-actions fade-up delay-3">
-      <a href="#book" class="btn-primary">Book Appointment</a>
-      <a href="#services" class="btn-outline">Our Services</a>
+      <a href="#book" class="btn-primary" data-en="Book Appointment" data-es="Reservar Cita">Book Appointment</a>
+      <a href="#services" class="btn-outline" data-en="Our Services" data-es="Nuestros Servicios">Our Services</a>
     </div>
     <div class="hero-stats fade-up delay-4">
       <div>
         <div class="stat-num">15+</div>
-        <div class="stat-label">Years of Care</div>
+        <div class="stat-label" data-en="Years of Care" data-es="Años de Cuidado">Years of Care</div>
       </div>
       <div>
         <div class="stat-num">4,800+</div>
-        <div class="stat-label">Happy Patients</div>
+        <div class="stat-label" data-en="Happy Patients" data-es="Pacientes Felices">Happy Patients</div>
       </div>
       <div>
         <div class="stat-num">98%</div>
-        <div class="stat-label">Satisfaction Rate</div>
+        <div class="stat-label" data-en="Satisfaction Rate" data-es="Tasa de Satisfacción">Satisfaction Rate</div>
       </div>
     </div>
   </div>
@@ -881,7 +1166,7 @@
     <div class="hero-img-overlay"></div>
     <div class="hero-badge">
       <span>★ 4.9</span>
-      <span>Google Reviews</span>
+      <span data-en="Google Reviews" data-es="Reseñas Google">Google Reviews</span>
     </div>
     <div class="hero-card">
       <div class="hero-card-icon">🦷</div>
@@ -899,47 +1184,47 @@
 <section id="services">
   <div class="services-header">
     <div>
-      <div class="section-tag">What We Offer</div>
-      <h2 class="section-h2">Comprehensive Care<br/>for <em>Every</em> Smile</h2>
+      <div class="section-tag" data-en="What We Offer" data-es="Lo Que Ofrecemos">What We Offer</div>
+      <h2 class="section-h2"><span data-en="Comprehensive Care" data-es="Cuidado Integral">Comprehensive Care</span><br/><span data-en="for" data-es="para">for</span> <em data-en="Every" data-es="Cada">Every</em> <span data-en="Smile" data-es="Sonrisa">Smile</span></h2>
     </div>
-    <a href="#book" class="btn-primary" style="white-space:nowrap">Book a Consultation</a>
+    <a href="#book" class="btn-primary" style="white-space:nowrap" data-en="Book a Consultation" data-es="Reservar Consulta">Book a Consultation</a>
   </div>
   <div class="services-grid">
     <div class="service-card">
       <div class="service-icon">🦷</div>
-      <h3>General Dentistry</h3>
-      <p>Routine cleanings, checkups, fillings, and preventive care to keep your teeth and gums in peak health year-round.</p>
-      <a href="#book" class="service-link">Schedule a cleaning</a>
+      <h3 data-en="General Dentistry" data-es="Odontología General">General Dentistry</h3>
+      <p data-en="Routine cleanings, checkups, fillings, and preventive care to keep your teeth and gums in peak health year-round." data-es="Limpiezas, revisiones, empastes y cuidado preventivo para mantener tus dientes y encías en óptima salud todo el año.">Routine cleanings, checkups, fillings, and preventive care to keep your teeth and gums in peak health year-round.</p>
+      <a href="#book" class="service-link" data-en="Schedule a cleaning" data-es="Agendar limpieza">Schedule a cleaning</a>
     </div>
     <div class="service-card">
       <div class="service-icon">✨</div>
-      <h3>Cosmetic Dentistry</h3>
-      <p>Teeth whitening, porcelain veneers, bonding, and smile redesigns to give you the confidence you deserve.</p>
-      <a href="#book" class="service-link">Explore options</a>
+      <h3 data-en="Cosmetic Dentistry" data-es="Odontología Cosmética">Cosmetic Dentistry</h3>
+      <p data-en="Teeth whitening, porcelain veneers, bonding, and smile redesigns to give you the confidence you deserve." data-es="Blanqueamiento dental, carillas de porcelana, y rediseño de sonrisa para darte la confianza que mereces.">Teeth whitening, porcelain veneers, bonding, and smile redesigns to give you the confidence you deserve.</p>
+      <a href="#book" class="service-link" data-en="Explore options" data-es="Explorar opciones">Explore options</a>
     </div>
     <div class="service-card">
       <div class="service-icon">🔩</div>
-      <h3>Dental Implants</h3>
-      <p>Permanent, natural-looking tooth replacement that restores function and aesthetics with long-lasting results.</p>
-      <a href="#book" class="service-link">Learn more</a>
+      <h3 data-en="Dental Implants" data-es="Implantes Dentales">Dental Implants</h3>
+      <p data-en="Permanent, natural-looking tooth replacement that restores function and aesthetics with long-lasting results." data-es="Reemplazo de dientes permanente y natural que restaura la función y la estética con resultados duraderos.">Permanent, natural-looking tooth replacement that restores function and aesthetics with long-lasting results.</p>
+      <a href="#book" class="service-link" data-en="Learn more" data-es="Saber más">Learn more</a>
     </div>
     <div class="service-card">
       <div class="service-icon">😁</div>
-      <h3>Orthodontics</h3>
-      <p>Traditional braces and clear aligner therapy (Invisalign) to straighten teeth discreetly at any age.</p>
-      <a href="#book" class="service-link">Get assessed</a>
+      <h3 data-en="Orthodontics" data-es="Ortodoncia">Orthodontics</h3>
+      <p data-en="Traditional braces and clear aligner therapy (Invisalign) to straighten teeth discreetly at any age." data-es="Brackets tradicionales y alineadores transparentes (Invisalign) para enderezar los dientes discretamente a cualquier edad.">Traditional braces and clear aligner therapy (Invisalign) to straighten teeth discreetly at any age.</p>
+      <a href="#book" class="service-link" data-en="Get assessed" data-es="Hacer evaluación">Get assessed</a>
     </div>
     <div class="service-card">
       <div class="service-icon">🚨</div>
-      <h3>Emergency Dental</h3>
-      <p>Same-day appointments for toothaches, broken teeth, lost fillings, and other urgent dental situations.</p>
-      <a href="#book" class="service-link">Call us now</a>
+      <h3 data-en="Emergency Dental" data-es="Dental de Urgencia">Emergency Dental</h3>
+      <p data-en="Same-day appointments for toothaches, broken teeth, lost fillings, and other urgent dental situations." data-es="Citas el mismo día para dolores de muela, dientes rotos, empastes perdidos y otras situaciones dentales urgentes.">Same-day appointments for toothaches, broken teeth, lost fillings, and other urgent dental situations.</p>
+      <a href="#book" class="service-link" data-en="Call us now" data-es="Llámenos ahora">Call us now</a>
     </div>
     <div class="service-card">
       <div class="service-icon">👶</div>
-      <h3>Pediatric Dentistry</h3>
-      <p>A friendly, gentle environment designed to make dental visits positive and fear-free for children of all ages.</p>
-      <a href="#book" class="service-link">Book for your child</a>
+      <h3 data-en="Pediatric Dentistry" data-es="Odontología Pediátrica">Pediatric Dentistry</h3>
+      <p data-en="A friendly, gentle environment designed to make dental visits positive and fear-free for children of all ages." data-es="Un ambiente amigable y gentil diseñado para que las visitas dentales sean positivas y sin miedo para niños de todas las edades.">A friendly, gentle environment designed to make dental visits positive and fear-free for children of all ages.</p>
+      <a href="#book" class="service-link" data-en="Book for your child" data-es="Reservar para su hijo">Book for your child</a>
     </div>
   </div>
 </section>
@@ -949,11 +1234,11 @@
   <div class="why-visual">
     <div class="why-visual-inner">🦷</div>
     <div class="why-card top">
-      <div class="why-card-label">Experience</div>
-      <div class="why-card-val">15+ Years</div>
+      <div class="why-card-label" data-en="Experience" data-es="Experiencia">Experience</div>
+      <div class="why-card-val" data-en="15+ Years" data-es="15+ Años">15+ Years</div>
     </div>
     <div class="why-card bottom">
-      <div class="why-card-label">Patient Rating</div>
+      <div class="why-card-label" data-en="Patient Rating" data-es="Calificación">Patient Rating</div>
       <div class="why-card-val">4.9 / 5 ★</div>
     </div>
   </div>
@@ -964,29 +1249,29 @@
       <div class="feature-item">
         <div class="feature-num">01</div>
         <div>
-          <h4>State-of-the-Art Technology</h4>
-          <p>Digital X-rays, 3D scanning, and laser dentistry mean more accurate diagnoses and faster, more comfortable treatments.</p>
+          <h4 data-en="State-of-the-Art Technology" data-es="Tecnología de Vanguardia">State-of-the-Art Technology</h4>
+          <p data-en="Digital X-rays, 3D scanning, and laser dentistry mean more accurate diagnoses and faster, more comfortable treatments." data-es="Radiografías digitales, escaneo 3D y odontología láser para diagnósticos más precisos y tratamientos más rápidos y cómodos.">Digital X-rays, 3D scanning, and laser dentistry mean more accurate diagnoses and faster, more comfortable treatments.</p>
         </div>
       </div>
       <div class="feature-item">
         <div class="feature-num">02</div>
         <div>
-          <h4>Gentle, Patient-First Approach</h4>
-          <p>We take time to understand your concerns and tailor every treatment plan around your comfort and goals.</p>
+          <h4 data-en="Gentle, Patient-First Approach" data-es="Enfoque Gentil, Paciente Primero">Gentle, Patient-First Approach</h4>
+          <p data-en="We take time to understand your concerns and tailor every treatment plan around your comfort and goals." data-es="Nos tomamos el tiempo para entender tus inquietudes y personalizar cada plan de tratamiento según tu comodidad y objetivos.">We take time to understand your concerns and tailor every treatment plan around your comfort and goals.</p>
         </div>
       </div>
       <div class="feature-item">
         <div class="feature-num">03</div>
         <div>
-          <h4>Transparent Pricing</h4>
-          <p>No surprises. We clearly explain all costs before any procedure and work with most major insurance plans.</p>
+          <h4 data-en="Transparent Pricing" data-es="Precios Transparentes">Transparent Pricing</h4>
+          <p data-en="No surprises. We clearly explain all costs before any procedure and work with most major insurance plans." data-es="Sin sorpresas. Explicamos claramente todos los costos antes de cualquier procedimiento y trabajamos con la mayoría de los seguros.">No surprises. We clearly explain all costs before any procedure and work with most major insurance plans.</p>
         </div>
       </div>
       <div class="feature-item">
         <div class="feature-num">04</div>
         <div>
-          <h4>Convenient Hours & Easy Booking</h4>
-          <p>Early morning, evening, and Saturday appointments available. Book online in seconds, 24/7.</p>
+          <h4 data-en="Convenient Hours & Easy Booking" data-es="Horarios Convenientes y Reserva Fácil">Convenient Hours & Easy Booking</h4>
+          <p data-en="Early morning, evening, and Saturday appointments available. Book online in seconds, 24/7." data-es="Citas disponibles temprano en la mañana, por la tarde y los sábados. Reserva en línea en segundos, 24/7.">Early morning, evening, and Saturday appointments available. Book online in seconds, 24/7.</p>
         </div>
       </div>
     </div>
@@ -995,39 +1280,39 @@
 
 <!-- TESTIMONIALS -->
 <section id="testimonials">
-  <div class="section-tag">Patient Stories</div>
-  <h2 class="section-h2">What Our Patients<br/><em>Are Saying</em></h2>
+  <div class="section-tag" data-en="Patient Stories" data-es="Historias de Pacientes">Patient Stories</div>
+  <h2 class="section-h2"><span data-en="What Our Patients" data-es="Lo Que Dicen">What Our Patients</span><br/><em data-en="Are Saying" data-es="Nuestros Pacientes">Are Saying</em></h2>
   <div class="testi-grid">
     <div class="testi-card">
       <div class="testi-stars">★★★★★</div>
-      <p class="testi-text">"I've been terrified of the dentist my whole life. The team here completely changed that. They were patient, kind, and explained every step. Now I actually look forward to my visits!"</p>
+      <p class="testi-text" data-en='"I've been terrified of the dentist my whole life. The team here completely changed that. They were patient, kind, and explained every step. Now I actually look forward to my visits!"' data-es='"Tuve miedo al dentista toda mi vida. El equipo aquí lo cambió por completo. Fueron pacientes, amables y explicaron cada paso. ¡Ahora espero mis visitas con emoción!"'>"I've been terrified of the dentist my whole life. The team here completely changed that. They were patient, kind, and explained every step. Now I actually look forward to my visits!"</p>
       <div class="testi-author">
         <div class="testi-avatar">SM</div>
         <div>
           <div class="testi-name">Sarah M.</div>
-          <div class="testi-since">Patient since 2019</div>
+          <div class="testi-since" data-en="Patient since 2019" data-es="Paciente desde 2019">Patient since 2019</div>
         </div>
       </div>
     </div>
     <div class="testi-card">
       <div class="testi-stars">★★★★★</div>
-      <p class="testi-text">"Got my veneers done here and the result is absolutely stunning. Dr. Chen has a true eye for aesthetics. Friends keep asking if I had my teeth done — I always say yes, proudly!"</p>
+      <p class="testi-text" data-en='"Got my veneers done here and the result is absolutely stunning. Dr. Chen has a true eye for aesthetics. Friends keep asking if I had my teeth done — I always say yes, proudly!"' data-es='"Me hice las carillas aquí y el resultado es absolutamente impresionante. El Dr. tiene un verdadero ojo para la estética. Los amigos siempre preguntan — ¡siempre digo que sí, con orgullo!"'>"Got my veneers done here and the result is absolutely stunning. Dr. Chen has a true eye for aesthetics. Friends keep asking if I had my teeth done — I always say yes, proudly!"</p>
       <div class="testi-author">
         <div class="testi-avatar">JR</div>
         <div>
           <div class="testi-name">James R.</div>
-          <div class="testi-since">Patient since 2021</div>
+          <div class="testi-since" data-en="Patient since 2021" data-es="Paciente desde 2021">Patient since 2021</div>
         </div>
       </div>
     </div>
     <div class="testi-card">
       <div class="testi-stars">★★★★★</div>
-      <p class="testi-text">"Brought all three of my kids here and they all love it. The pediatric team is wonderful — my youngest used to cry at just the mention of the dentist. Not anymore!"</p>
+      <p class="testi-text" data-en='"Brought all three of my kids here and they all love it. The pediatric team is wonderful — my youngest used to cry at just the mention of the dentist. Not anymore!"' data-es='"Traje a mis tres hijos y todos lo aman. El equipo pediátrico es maravilloso — el más pequeño solía llorar solo de mencionar al dentista. ¡Ya no más!"'>"Brought all three of my kids here and they all love it. The pediatric team is wonderful — my youngest used to cry at just the mention of the dentist. Not anymore!"</p>
       <div class="testi-author">
         <div class="testi-avatar">LP</div>
         <div>
           <div class="testi-name">Linda P.</div>
-          <div class="testi-since">Patient since 2020</div>
+          <div class="testi-since" data-en="Patient since 2020" data-es="Paciente desde 2020">Patient since 2020</div>
         </div>
       </div>
     </div>
@@ -1036,40 +1321,661 @@
 
 <!-- TEAM -->
 <section id="team">
-  <div style="text-align:center; max-width:560px; margin:0 auto 1rem;">
-    <div class="section-tag" style="justify-content:center;">Meet The Team</div>
-    <h2 class="section-h2">Passionate Experts,<br/><em>Caring Hearts</em></h2>
+  <div style="text-align:center; max-width:600px; margin:0 auto 1rem;">
+    <div class="section-tag" style="justify-content:center;" data-en="Meet The Team" data-es="Conoce al Equipo">Meet The Team</div>
+    <h2 class="section-h2"><span data-en="Passionate Experts," data-es="Expertos Apasionados,">Passionate Experts,</span><br/><em data-en="Caring Hearts" data-es="Corazones que Cuidan">Caring Hearts</em></h2>
   </div>
   <div class="team-grid">
+
+    <!-- ══ Dr. Fiorella Rubio — woman, auburn waves, teal scrubs ══ -->
     <div class="team-card">
-      <div class="team-photo">👨‍⚕️</div>
+      <div class="team-photo chibi-avatar" id="avatar1">
+        <svg viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg" class="avatar-svg">
+          <defs>
+            <radialGradient id="bg1" cx="50%" cy="30%" r="80%">
+              <stop offset="0%" stop-color="#e0f4ec"/>
+              <stop offset="100%" stop-color="#b8dece"/>
+            </radialGradient>
+            <radialGradient id="sk1" cx="42%" cy="28%" r="65%">
+              <stop offset="0%" stop-color="#fce8d4"/>
+              <stop offset="70%" stop-color="#f4c49a"/>
+              <stop offset="100%" stop-color="#e8a878"/>
+            </radialGradient>
+            <radialGradient id="sk1b" cx="42%" cy="28%" r="65%">
+              <stop offset="0%" stop-color="#fce0c8"/>
+              <stop offset="100%" stop-color="#e8a070"/>
+            </radialGradient>
+            <radialGradient id="cheek1" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#f4907a" stop-opacity="0.5"/>
+              <stop offset="100%" stop-color="#f4907a" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="hair1t" x1="0.3" y1="0" x2="0.6" y2="1">
+              <stop offset="0%" stop-color="#e8903a"/>
+              <stop offset="40%" stop-color="#c86820"/>
+              <stop offset="100%" stop-color="#a04810"/>
+            </linearGradient>
+            <linearGradient id="scrub1" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#4a9e8e"/>
+              <stop offset="100%" stop-color="#2e7a6c"/>
+            </linearGradient>
+            <filter id="shadow1">
+              <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#1a5a40" flood-opacity="0.2"/>
+            </filter>
+            <filter id="blur1"><feGaussianBlur stdDeviation="2.5"/></filter>
+            <filter id="blur2"><feGaussianBlur stdDeviation="1.2"/></filter>
+          </defs>
+
+          <!-- BG circle -->
+          <circle cx="100" cy="130" r="100" fill="url(#bg1)"/>
+
+          <!-- ── BODY (small chibi) ── -->
+          <!-- Legs -->
+          <rect x="78" y="215" width="19" height="35" rx="9" fill="url(#sk1b)"/>
+          <rect x="103" y="215" width="19" height="35" rx="9" fill="url(#sk1b)"/>
+          <!-- Shoes -->
+          <ellipse cx="87" cy="250" rx="14" ry="8" fill="#4a4a5a"/>
+          <ellipse cx="112" cy="250" rx="14" ry="8" fill="#4a4a5a"/>
+          <ellipse cx="85" cy="248" rx="9" ry="5" fill="#6a6a7a"/>
+          <ellipse cx="110" cy="248" rx="9" ry="5" fill="#6a6a7a"/>
+          <!-- Skirt / scrub pants -->
+          <path d="M68 195 Q74 225 78 240 L122 240 Q126 225 132 195 Z" fill="#3a5a7a" opacity="0.9"/>
+          <path d="M68 195 L132 195 L128 205 L72 205Z" fill="#2e4a68"/>
+          <!-- Belt -->
+          <rect x="70" y="190" width="60" height="8" rx="4" fill="#c8a840"/>
+          <rect x="95" y="188" width="10" height="12" rx="3" fill="#e0c050"/>
+          <rect x="97" y="190" width="6" height="8" rx="2" fill="#c8a840"/>
+          <!-- Torso / scrub top -->
+          <rect x="66" y="148" width="68" height="48" rx="18" fill="url(#scrub1)"/>
+          <!-- White undershirt V -->
+          <path d="M88 152 L100 168 L112 152 Q106 155 100 158 Q94 155 88 152Z" fill="white" opacity="0.7"/>
+          <!-- Scrub highlight -->
+          <ellipse cx="82" cy="158" rx="10" ry="6" fill="white" opacity="0.12"/>
+          <!-- Arms -->
+          <rect x="46" y="152" width="22" height="38" rx="11" fill="url(#scrub1)"/>
+          <rect x="132" y="152" width="22" height="38" rx="11" fill="url(#scrub1)"/>
+          <!-- Hands -->
+          <ellipse cx="57" cy="192" rx="11" ry="9" fill="url(#sk1b)"/>
+          <ellipse cx="143" cy="192" rx="11" ry="9" fill="url(#sk1b)"/>
+          <!-- Fingers hint -->
+          <path d="M50 188 Q48 192 50 196" stroke="#e8a070" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M136 188 Q134 192 136 196" stroke="#e8a070" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+          <!-- ── NECK ── -->
+          <rect x="90" y="136" width="20" height="20" rx="8" fill="url(#sk1)"/>
+          <ellipse cx="100" cy="152" rx="12" ry="5" fill="#d4906a" opacity="0.25"/>
+
+          <!-- ── HEAD (big chibi) ── -->
+          <ellipse cx="100" cy="96" rx="62" ry="66" fill="url(#sk1)" filter="url(#shadow1)"/>
+
+          <!-- Ear left -->
+          <ellipse cx="38" cy="98" rx="11" ry="16" fill="url(#sk1)"/>
+          <ellipse cx="39" cy="98" rx="6" ry="10" fill="#f0a878" opacity="0.5"/>
+          <!-- Ear right -->
+          <ellipse cx="162" cy="98" rx="11" ry="16" fill="url(#sk1)"/>
+          <ellipse cx="161" cy="98" rx="6" ry="10" fill="#f0a878" opacity="0.5"/>
+
+          <!-- ── HAIR (back, below head) ── -->
+          <!-- Back waves -->
+          <path d="M38 80 Q22 130 28 190 Q36 175 40 155 Q44 135 42 110Z" fill="url(#hair1t)"/>
+          <path d="M162 80 Q178 130 172 190 Q164 175 160 155 Q156 135 158 110Z" fill="url(#hair1t)"/>
+          <!-- Back bulk -->
+          <ellipse cx="100" cy="62" rx="64" ry="36" fill="url(#hair1t)"/>
+          <rect x="36" y="64" width="128" height="28" fill="url(#hair1t)"/>
+
+          <!-- Wavy strands back -->
+          <path d="M36 90 Q30 120 34 155 Q38 140 36 120 Q38 105 36 90Z" fill="#b86018" opacity="0.6"/>
+          <path d="M164 90 Q170 120 166 155 Q162 140 164 120 Q162 105 164 90Z" fill="#b86018" opacity="0.6"/>
+
+          <!-- ── HAIR FRONT over head ── -->
+          <!-- Main top -->
+          <path d="M38 72 Q42 44 100 38 Q158 44 162 72 Q140 60 100 58 Q60 60 38 72Z" fill="url(#hair1t)"/>
+          <!-- Side sweeps -->
+          <path d="M38 72 Q36 88 40 100" stroke="#c87020" stroke-width="14" fill="none" stroke-linecap="round"/>
+          <path d="M162 72 Q164 88 160 100" stroke="#c87020" stroke-width="14" fill="none" stroke-linecap="round"/>
+          <!-- Wavy curls front -->
+          <path d="M42 86 Q38 98 44 108 Q52 100 48 90 Q44 84 42 86Z" fill="#d07828" opacity="0.85"/>
+          <path d="M158 86 Q162 98 156 108 Q148 100 152 90 Q156 84 158 86Z" fill="#d07828" opacity="0.85"/>
+          <!-- Hair highlight shine -->
+          <path d="M70 44 Q82 38 96 42" stroke="#f0b850" stroke-width="5" fill="none" opacity="0.55" stroke-linecap="round"/>
+          <path d="M100 40 Q114 36 126 42" stroke="#f0b850" stroke-width="4" fill="none" opacity="0.45" stroke-linecap="round"/>
+
+          <!-- ── FACE FEATURES ── -->
+          <!-- Eyebrows -->
+          <path d="M68 74 Q80 67 92 71" stroke="#7a3810" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+          <path d="M108 71 Q120 67 132 74" stroke="#7a3810" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+
+          <!-- Eye shadow (lids) -->
+          <ellipse cx="80" cy="84" rx="16" ry="8" fill="#d4a0b8" opacity="0.2"/>
+          <ellipse cx="120" cy="84" rx="16" ry="8" fill="#d4a0b8" opacity="0.2"/>
+
+          <!-- Eyes whites — large chibi eyes -->
+          <ellipse cx="80" cy="88" rx="15" ry="13" fill="white"/>
+          <ellipse cx="120" cy="88" rx="15" ry="13" fill="white"/>
+          <!-- Iris -->
+          <circle cx="80" cy="89" r="10" fill="#6b3a18"/>
+          <circle cx="120" cy="89" r="10" fill="#6b3a18"/>
+          <!-- Pupil -->
+          <circle cx="80" cy="89" r="6" fill="#1a0804" class="eye-pupil"/>
+          <circle cx="120" cy="89" r="6" fill="#1a0804" class="eye-pupil"/>
+          <!-- Big shine -->
+          <circle cx="84" cy="84" r="4" fill="white"/>
+          <circle cx="124" cy="84" r="4" fill="white"/>
+          <!-- Small shine -->
+          <circle cx="76" cy="93" r="1.8" fill="rgba(255,255,255,0.6)"/>
+          <circle cx="116" cy="93" r="1.8" fill="rgba(255,255,255,0.6)"/>
+          <!-- Eyelid line -->
+          <path d="M65 82 Q80 76 95 82" stroke="#2a1008" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <path d="M105 82 Q120 76 135 82" stroke="#2a1008" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <!-- Lashes -->
+          <path d="M65 83 Q72 78 80 81" stroke="#1a0804" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M105 83 Q112 78 120 81" stroke="#1a0804" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <!-- Lower eye line -->
+          <path d="M66 96 Q80 101 94 96" stroke="#a07860" stroke-width="1.2" fill="none" opacity="0.5"/>
+          <path d="M106 96 Q120 101 134 96" stroke="#a07860" stroke-width="1.2" fill="none" opacity="0.5"/>
+
+          <!-- NOSE small chibi -->
+          <path d="M96 106 Q93 112 88 113 Q100 117 112 113 Q107 112 104 106" fill="url(#sk1)" stroke="#d49070" stroke-width="1" opacity="0.45"/>
+
+          <!-- LIPS cute smile -->
+          <path d="M82 122 Q100 136 118 122" fill="#e07880"/>
+          <path d="M82 122 Q100 133 118 122" fill="white"/>
+          <!-- Teeth lines -->
+          <line x1="93" y1="122" x2="92" y2="131" stroke="#f0e0de" stroke-width="1.3"/>
+          <line x1="100" y1="122" x2="100" y2="133" stroke="#f0e0de" stroke-width="1.3"/>
+          <line x1="107" y1="122" x2="108" y2="131" stroke="#f0e0de" stroke-width="1.3"/>
+          <!-- Lip top line -->
+          <path d="M82 122 Q91 118 100 120 Q109 118 118 122" fill="none" stroke="#c05870" stroke-width="1.2" opacity="0.7"/>
+
+          <!-- CHEEKS chibi blush -->
+          <ellipse cx="62" cy="108" rx="16" ry="10" fill="url(#cheek1)" filter="url(#blur1)"/>
+          <ellipse cx="138" cy="108" rx="16" ry="10" fill="url(#cheek1)" filter="url(#blur1)"/>
+
+          <!-- Stethoscope -->
+          <path d="M80 170 Q66 180 64 194 Q64 207 74 207 Q84 207 84 196 Q84 186 92 182" stroke="#2a2a3a" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+          <circle cx="74" cy="207" r="8" fill="#2a2a3a"/>
+          <circle cx="74" cy="207" r="4" fill="#4a9e8e"/>
+          <circle cx="80" cy="168" r="5" fill="#2a2a3a"/>
+          <circle cx="92" cy="163" r="5" fill="#2a2a3a"/>
+        </svg>
+      </div>
       <div class="team-name">Dr. Fiorella Rubio</div>
-      <div class="team-role">Lead Dentist & Founder</div>
+      <div class="team-role" data-en="Lead Dentist & Founder" data-es="Dentista Principal y Fundadora">Lead Dentist & Founder</div>
     </div>
+
+    <!-- ══ Dr. Juan Tomas Coronado — man, dark hair, white coat ══ -->
     <div class="team-card">
-      <div class="team-photo">👩‍⚕️</div>
+      <div class="team-photo chibi-avatar" id="avatar2">
+        <svg viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg" class="avatar-svg">
+          <defs>
+            <radialGradient id="bg2" cx="50%" cy="30%" r="80%">
+              <stop offset="0%" stop-color="#dce8fc"/>
+              <stop offset="100%" stop-color="#b0c4f0"/>
+            </radialGradient>
+            <radialGradient id="sk2" cx="42%" cy="28%" r="65%">
+              <stop offset="0%" stop-color="#fde8d0"/>
+              <stop offset="70%" stop-color="#f5c898"/>
+              <stop offset="100%" stop-color="#e8a870"/>
+            </radialGradient>
+            <radialGradient id="sk2b" cx="42%" cy="28%" r="65%">
+              <stop offset="0%" stop-color="#fde0c4"/>
+              <stop offset="100%" stop-color="#e8a060"/>
+            </radialGradient>
+            <radialGradient id="cheek2" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#f49070" stop-opacity="0.4"/>
+              <stop offset="100%" stop-color="#f49070" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="hair2t" x1="0.3" y1="0" x2="0.5" y2="1">
+              <stop offset="0%" stop-color="#1e1208"/>
+              <stop offset="100%" stop-color="#0a0804"/>
+            </linearGradient>
+            <linearGradient id="coat2" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#ffffff"/>
+              <stop offset="100%" stop-color="#e8eef8"/>
+            </linearGradient>
+            <filter id="shadow2">
+              <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#1a3a7a" flood-opacity="0.18"/>
+            </filter>
+            <filter id="blur3"><feGaussianBlur stdDeviation="2.5"/></filter>
+          </defs>
+
+          <circle cx="100" cy="130" r="100" fill="url(#bg2)"/>
+
+          <!-- LEGS -->
+          <rect x="78" y="215" width="19" height="35" rx="9" fill="url(#sk2b)"/>
+          <rect x="103" y="215" width="19" height="35" rx="9" fill="url(#sk2b)"/>
+          <!-- Shoes dark -->
+          <ellipse cx="87" cy="250" rx="14" ry="8" fill="#2a2a3a"/>
+          <ellipse cx="112" cy="250" rx="14" ry="8" fill="#2a2a3a"/>
+          <ellipse cx="85" cy="248" rx="9" ry="5" fill="#484858"/>
+          <ellipse cx="110" cy="248" rx="9" ry="5" fill="#484858"/>
+          <!-- Trousers navy -->
+          <path d="M68 195 Q74 225 78 240 L122 240 Q126 225 132 195 Z" fill="#2a3a5a"/>
+          <path d="M68 195 L132 195 L128 205 L72 205Z" fill="#1e2e4a"/>
+          <!-- White coat body -->
+          <rect x="62" y="145" width="76" height="55" rx="18" fill="url(#coat2)"/>
+          <!-- Blue shirt visible -->
+          <path d="M88 148 L100 166 L112 148 Q106 152 100 155 Q94 152 88 148Z" fill="#3a6ab0"/>
+          <!-- Coat lapels -->
+          <path d="M80 148 L88 148 L80 180Z" fill="#dce8f8"/>
+          <path d="M120 148 L112 148 L120 180Z" fill="#dce8f8"/>
+          <!-- Coat highlight -->
+          <ellipse cx="76" cy="158" rx="8" ry="6" fill="white" opacity="0.4"/>
+          <!-- Arms coat -->
+          <rect x="42" y="150" width="22" height="42" rx="11" fill="url(#coat2)"/>
+          <rect x="136" y="150" width="22" height="42" rx="11" fill="url(#coat2)"/>
+          <!-- Hands -->
+          <ellipse cx="53" cy="194" rx="11" ry="9" fill="url(#sk2b)"/>
+          <ellipse cx="147" cy="194" rx="11" ry="9" fill="url(#sk2b)"/>
+
+          <!-- NECK -->
+          <rect x="90" y="134" width="20" height="18" rx="8" fill="url(#sk2)"/>
+
+          <!-- HEAD -->
+          <ellipse cx="100" cy="95" rx="63" ry="68" fill="url(#sk2)" filter="url(#shadow2)"/>
+
+          <!-- Ears -->
+          <ellipse cx="37" cy="96" rx="11" ry="16" fill="url(#sk2)"/>
+          <ellipse cx="38" cy="96" rx="6" ry="10" fill="#e8a060" opacity="0.45"/>
+          <ellipse cx="163" cy="96" rx="11" ry="16" fill="url(#sk2)"/>
+          <ellipse cx="162" cy="96" rx="6" ry="10" fill="#e8a060" opacity="0.45"/>
+
+          <!-- HAIR dark, short, styled -->
+          <ellipse cx="100" cy="48" rx="64" ry="34" fill="url(#hair2t)"/>
+          <rect x="36" y="50" width="128" height="26" fill="url(#hair2t)"/>
+          <!-- Hair shape top — swept -->
+          <path d="M36 56 Q40 34 100 30 Q160 34 164 56 Q136 46 100 44 Q64 46 36 56Z" fill="url(#hair2t)"/>
+          <!-- Side fade -->
+          <path d="M37 62 Q38 80 40 100" stroke="#0a0804" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.9"/>
+          <path d="M163 62 Q162 80 160 100" stroke="#0a0804" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.9"/>
+          <!-- Hair texture shine -->
+          <path d="M68 40 Q84 33 100 38" stroke="#3a2810" stroke-width="5" fill="none" opacity="0.5" stroke-linecap="round"/>
+          <path d="M102 34 Q118 30 132 38" stroke="#3a2810" stroke-width="4" fill="none" opacity="0.4" stroke-linecap="round"/>
+
+          <!-- EYEBROWS thick confident -->
+          <path d="M66 76 Q80 68 94 73" stroke="#1e1208" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path d="M106 73 Q120 68 134 76" stroke="#1e1208" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+          <!-- EYES large -->
+          <ellipse cx="80" cy="88" rx="15.5" ry="13" fill="white"/>
+          <ellipse cx="120" cy="88" rx="15.5" ry="13" fill="white"/>
+          <circle cx="80" cy="89" r="10" fill="#2a1808"/>
+          <circle cx="120" cy="89" r="10" fill="#2a1808"/>
+          <circle cx="80" cy="89" r="6" fill="#0a0604" class="eye-pupil"/>
+          <circle cx="120" cy="89" r="6" fill="#0a0604" class="eye-pupil"/>
+          <circle cx="84" cy="84" r="4.2" fill="white"/>
+          <circle cx="124" cy="84" r="4.2" fill="white"/>
+          <circle cx="76" cy="94" r="1.8" fill="rgba(255,255,255,0.55)"/>
+          <circle cx="116" cy="94" r="1.8" fill="rgba(255,255,255,0.55)"/>
+          <path d="M65 82 Q80 75 95 82" stroke="#1a0804" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M105 82 Q120 75 135 82" stroke="#1a0804" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M66 82 Q73 77 80 80" stroke="#1a0804" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+          <path d="M106 80 Q113 77 120 80" stroke="#1a0804" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+          <path d="M66 96 Q80 101 94 96" stroke="#906848" stroke-width="1.2" fill="none" opacity="0.45"/>
+          <path d="M106 96 Q120 101 134 96" stroke="#906848" stroke-width="1.2" fill="none" opacity="0.45"/>
+
+          <!-- NOSE -->
+          <path d="M96 106 Q93 113 88 115 Q100 119 112 115 Q107 113 104 106" fill="url(#sk2)" stroke="#c8906a" stroke-width="1.1" opacity="0.5"/>
+
+          <!-- SMILE confident -->
+          <path d="M80 124 Q100 140 120 124" fill="#d86858"/>
+          <path d="M80 124 Q100 137 120 124" fill="white"/>
+          <line x1="91" y1="124" x2="90" y2="135" stroke="#f0e0de" stroke-width="1.3"/>
+          <line x1="100" y1="124" x2="100" y2="137" stroke="#f0e0de" stroke-width="1.3"/>
+          <line x1="109" y1="124" x2="110" y2="135" stroke="#f0e0de" stroke-width="1.3"/>
+          <path d="M80 124 Q90 120 100 122 Q110 120 120 124" fill="none" stroke="#b04040" stroke-width="1.2" opacity="0.6"/>
+
+          <!-- CHEEKS -->
+          <ellipse cx="60" cy="108" rx="16" ry="10" fill="url(#cheek2)" filter="url(#blur3)"/>
+          <ellipse cx="140" cy="108" rx="16" ry="10" fill="url(#cheek2)" filter="url(#blur3)"/>
+
+          <!-- Dental mirror in hand -->
+          <line x1="147" y1="190" x2="166" y2="172" stroke="#c0c0c8" stroke-width="5" stroke-linecap="round"/>
+          <circle cx="168" cy="170" r="11" fill="none" stroke="#c0c0c8" stroke-width="3"/>
+          <circle cx="168" cy="170" r="8" fill="#e0f0fc" opacity="0.75"/>
+          <circle cx="165" cy="167" r="3" fill="white" opacity="0.6"/>
+        </svg>
+      </div>
       <div class="team-name">Dr. Juan Tomas Coronado</div>
-      <div class="team-role">Cosmetic Specialist</div>
+      <div class="team-role" data-en="Cosmetic Specialist" data-es="Especialista en Cosmética">Cosmetic Specialist</div>
     </div>
+
+    <!-- ══ Dr. Willy Pena — man, sandy hair, glasses ══ -->
     <div class="team-card">
-      <div class="team-photo">👨‍⚕️</div>
+      <div class="team-photo chibi-avatar" id="avatar3">
+        <svg viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg" class="avatar-svg">
+          <defs>
+            <radialGradient id="bg3" cx="50%" cy="30%" r="80%">
+              <stop offset="0%" stop-color="#fef5e0"/>
+              <stop offset="100%" stop-color="#f8dfa8"/>
+            </radialGradient>
+            <radialGradient id="sk3" cx="42%" cy="28%" r="65%">
+              <stop offset="0%" stop-color="#fff0e0"/>
+              <stop offset="70%" stop-color="#fcd4a8"/>
+              <stop offset="100%" stop-color="#f0b880"/>
+            </radialGradient>
+            <radialGradient id="sk3b" cx="42%" cy="28%" r="65%">
+              <stop offset="0%" stop-color="#fee8cc"/>
+              <stop offset="100%" stop-color="#f0a870"/>
+            </radialGradient>
+            <radialGradient id="cheek3" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#f4a080" stop-opacity="0.45"/>
+              <stop offset="100%" stop-color="#f4a080" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="hair3t" x1="0.2" y1="0" x2="0.5" y2="1">
+              <stop offset="0%" stop-color="#d4a828"/>
+              <stop offset="50%" stop-color="#b88818"/>
+              <stop offset="100%" stop-color="#9a7010"/>
+            </linearGradient>
+            <filter id="shadow3">
+              <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#8a6010" flood-opacity="0.18"/>
+            </filter>
+            <filter id="blur4"><feGaussianBlur stdDeviation="2.5"/></filter>
+          </defs>
+
+          <circle cx="100" cy="130" r="100" fill="url(#bg3)"/>
+
+          <!-- LEGS -->
+          <rect x="78" y="215" width="19" height="35" rx="9" fill="url(#sk3b)"/>
+          <rect x="103" y="215" width="19" height="35" rx="9" fill="url(#sk3b)"/>
+          <!-- Sneakers -->
+          <ellipse cx="87" cy="250" rx="15" ry="8" fill="#e0e0e8"/>
+          <ellipse cx="112" cy="250" rx="15" ry="8" fill="#e0e0e8"/>
+          <ellipse cx="85" cy="247" rx="10" ry="5" fill="white"/>
+          <ellipse cx="110" cy="247" rx="10" ry="5" fill="white"/>
+          <path d="M78 250 Q87 245 96 250" stroke="#b0b0b8" stroke-width="1" fill="none"/>
+          <path d="M103 250 Q112 245 121 250" stroke="#b0b0b8" stroke-width="1" fill="none"/>
+          <!-- Chinos khaki -->
+          <path d="M68 195 Q74 225 78 242 L122 242 Q126 225 132 195 Z" fill="#c8a870"/>
+          <path d="M68 195 L132 195 L128 206 L72 206Z" fill="#b89860"/>
+          <!-- White coat body -->
+          <rect x="62" y="145" width="76" height="56" rx="18" fill="white"/>
+          <!-- Inner shirt collar -->
+          <path d="M88 148 L100 167 L112 148 Q106 153 100 156 Q94 153 88 148Z" fill="#4a8acc"/>
+          <!-- Coat lapels -->
+          <path d="M80 148 L88 148 L78 182Z" fill="#eeeeee"/>
+          <path d="M120 148 L112 148 L122 182Z" fill="#eeeeee"/>
+          <!-- Coat pocket + pens -->
+          <rect x="114" y="165" width="18" height="22" rx="4" fill="#f0f0f0"/>
+          <rect x="117" y="162" width="4" height="10" rx="2" fill="#3a7acc"/>
+          <rect x="123" y="162" width="4" height="10" rx="2" fill="#cc3a3a"/>
+          <!-- Arms coat -->
+          <rect x="42" y="150" width="22" height="42" rx="11" fill="white"/>
+          <rect x="136" y="150" width="22" height="42" rx="11" fill="white"/>
+          <!-- Hands -->
+          <ellipse cx="53" cy="194" rx="11" ry="9" fill="url(#sk3b)"/>
+          <ellipse cx="147" cy="194" rx="11" ry="9" fill="url(#sk3b)"/>
+
+          <!-- NECK -->
+          <rect x="90" y="134" width="20" height="18" rx="8" fill="url(#sk3)"/>
+
+          <!-- HEAD big chibi -->
+          <ellipse cx="100" cy="94" rx="63" ry="68" fill="url(#sk3)" filter="url(#shadow3)"/>
+
+          <!-- Ears -->
+          <ellipse cx="37" cy="95" rx="11" ry="16" fill="url(#sk3)"/>
+          <ellipse cx="38" cy="95" rx="6" ry="10" fill="#f4b070" opacity="0.4"/>
+          <ellipse cx="163" cy="95" rx="11" ry="16" fill="url(#sk3)"/>
+          <ellipse cx="162" cy="95" rx="6" ry="10" fill="#f4b070" opacity="0.4"/>
+
+          <!-- HAIR sandy blonde -->
+          <ellipse cx="100" cy="46" rx="65" ry="34" fill="url(#hair3t)"/>
+          <rect x="35" y="48" width="130" height="26" fill="url(#hair3t)"/>
+          <path d="M36 54 Q42 32 100 28 Q158 32 164 54 Q136 44 100 42 Q64 44 36 54Z" fill="url(#hair3t)"/>
+          <!-- Side hair -->
+          <path d="M37 60 Q36 80 38 104" stroke="#c09018" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.9"/>
+          <path d="M163 60 Q164 80 162 104" stroke="#c09018" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.9"/>
+          <!-- Highlights -->
+          <path d="M66 38 Q82 31 100 36" stroke="#f0d060" stroke-width="6" fill="none" opacity="0.55" stroke-linecap="round"/>
+          <path d="M102 32 Q118 27 134 36" stroke="#f0d060" stroke-width="5" fill="none" opacity="0.5" stroke-linecap="round"/>
+          <!-- Part line -->
+          <path d="M86 28 Q90 44 88 60" stroke="#d0a020" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.6"/>
+
+          <!-- EYEBROWS above glasses -->
+          <path d="M64 76 Q78 69 92 73" stroke="#9a7010" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+          <path d="M108 73 Q122 69 136 76" stroke="#9a7010" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+
+          <!-- GLASSES modern rounded rect -->
+          <rect x="60" y="82" width="36" height="28" rx="12" fill="none" stroke="#2a1808" stroke-width="3.5"/>
+          <rect x="104" y="82" width="36" height="28" rx="12" fill="none" stroke="#2a1808" stroke-width="3.5"/>
+          <!-- Bridge -->
+          <path d="M96 96 Q100 93 104 96" stroke="#2a1808" stroke-width="3" fill="none"/>
+          <!-- Temples -->
+          <line x1="38" y1="92" x2="60" y2="92" stroke="#2a1808" stroke-width="3" stroke-linecap="round"/>
+          <line x1="140" y1="92" x2="162" y2="92" stroke="#2a1808" stroke-width="3" stroke-linecap="round"/>
+          <!-- Lens tint -->
+          <rect x="61" y="83" width="34" height="26" rx="11" fill="#b8d8f8" opacity="0.22"/>
+          <rect x="105" y="83" width="34" height="26" rx="11" fill="#b8d8f8" opacity="0.22"/>
+
+          <!-- EYES blue large -->
+          <ellipse cx="78" cy="96" rx="13" ry="11" fill="white"/>
+          <ellipse cx="122" cy="96" rx="13" ry="11" fill="white"/>
+          <circle cx="78" cy="96" r="8.5" fill="#2858a0"/>
+          <circle cx="122" cy="96" r="8.5" fill="#2858a0"/>
+          <circle cx="78" cy="96" r="5" fill="#0a1e40" class="eye-pupil"/>
+          <circle cx="122" cy="96" r="5" fill="#0a1e40" class="eye-pupil"/>
+          <circle cx="82" cy="91" r="3.5" fill="white"/>
+          <circle cx="126" cy="91" r="3.5" fill="white"/>
+          <circle cx="74" cy="100" r="1.5" fill="rgba(255,255,255,0.5)"/>
+          <circle cx="118" cy="100" r="1.5" fill="rgba(255,255,255,0.5)"/>
+          <path d="M65 90 Q78 84 91 90" stroke="#1a0804" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <path d="M109 90 Q122 84 135 90" stroke="#1a0804" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+
+          <!-- NOSE small -->
+          <path d="M96 108 Q93 115 88 116 Q100 120 112 116 Q107 115 104 108" fill="url(#sk3)" stroke="#c89868" stroke-width="1.1" opacity="0.45"/>
+
+          <!-- WIDE SMILE friendly -->
+          <path d="M78 126 Q100 144 122 126" fill="#d86858"/>
+          <path d="M78 126 Q100 141 122 126" fill="white"/>
+          <line x1="90" y1="126" x2="89" y2="138" stroke="#f0e0de" stroke-width="1.3"/>
+          <line x1="100" y1="126" x2="100" y2="141" stroke="#f0e0de" stroke-width="1.3"/>
+          <line x1="110" y1="126" x2="111" y2="138" stroke="#f0e0de" stroke-width="1.3"/>
+          <path d="M78 126 Q89 122 100 124 Q111 122 122 126" fill="none" stroke="#b04030" stroke-width="1.2" opacity="0.6"/>
+
+          <!-- CHEEKS -->
+          <ellipse cx="60" cy="112" rx="16" ry="10" fill="url(#cheek3)" filter="url(#blur4)"/>
+          <ellipse cx="140" cy="112" rx="16" ry="10" fill="url(#cheek3)" filter="url(#blur4)"/>
+        </svg>
+      </div>
       <div class="team-name">Dr. Willy Pena</div>
-      <div class="team-role">Orthodontist</div>
+      <div class="team-role" data-en="Orthodontist" data-es="Ortodoncista">Orthodontist</div>
     </div>
+
+    <!-- ══ Dr. Augusto Nolasco — man, curly dark hair, cheerful ══ -->
     <div class="team-card">
-      <div class="team-photo">👩‍⚕️</div>
+      <div class="team-photo chibi-avatar" id="avatar4">
+        <svg viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg" class="avatar-svg">
+          <defs>
+            <radialGradient id="bg4" cx="50%" cy="30%" r="80%">
+              <stop offset="0%" stop-color="#ede0fa"/>
+              <stop offset="100%" stop-color="#cbb8ec"/>
+            </radialGradient>
+            <radialGradient id="sk4" cx="42%" cy="28%" r="65%">
+              <stop offset="0%" stop-color="#feebd8"/>
+              <stop offset="70%" stop-color="#f8cb98"/>
+              <stop offset="100%" stop-color="#ecac70"/>
+            </radialGradient>
+            <radialGradient id="sk4b" cx="42%" cy="28%" r="65%">
+              <stop offset="0%" stop-color="#fee0c4"/>
+              <stop offset="100%" stop-color="#eca060"/>
+            </radialGradient>
+            <radialGradient id="cheek4" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#f49878" stop-opacity="0.55"/>
+              <stop offset="100%" stop-color="#f49878" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="hair4t" x1="0.3" y1="0" x2="0.5" y2="1">
+              <stop offset="0%" stop-color="#2a1808"/>
+              <stop offset="100%" stop-color="#100804"/>
+            </linearGradient>
+            <filter id="shadow4">
+              <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#5a2890" flood-opacity="0.18"/>
+            </filter>
+            <filter id="blur5"><feGaussianBlur stdDeviation="2.5"/></filter>
+          </defs>
+
+          <circle cx="100" cy="130" r="100" fill="url(#bg4)"/>
+
+          <!-- LEGS -->
+          <rect x="78" y="215" width="19" height="35" rx="9" fill="url(#sk4b)"/>
+          <rect x="103" y="215" width="19" height="35" rx="9" fill="url(#sk4b)"/>
+          <!-- Shoes colorful -->
+          <ellipse cx="87" cy="250" rx="15" ry="8" fill="#3a60c0"/>
+          <ellipse cx="112" cy="250" rx="15" ry="8" fill="#3a60c0"/>
+          <ellipse cx="85" cy="247" rx="10" ry="5" fill="#5a80e0"/>
+          <ellipse cx="110" cy="247" rx="10" ry="5" fill="#5a80e0"/>
+          <!-- Pants -->
+          <path d="M68 195 Q74 225 78 242 L122 242 Q126 225 132 195 Z" fill="#3a3a4a"/>
+          <path d="M68 195 L132 195 L128 206 L72 206Z" fill="#2a2a3a"/>
+          <!-- Purple scrub top -->
+          <rect x="62" y="145" width="76" height="56" rx="18" fill="#7a4ab0"/>
+          <!-- White undershirt -->
+          <path d="M88 148 L100 167 L112 148 Q106 153 100 156 Q94 153 88 148Z" fill="white" opacity="0.7"/>
+          <!-- Scrub highlight -->
+          <ellipse cx="76" cy="158" rx="9" ry="6" fill="white" opacity="0.13"/>
+          <!-- Arms -->
+          <rect x="42" y="150" width="22" height="42" rx="11" fill="#7a4ab0"/>
+          <rect x="136" y="150" width="22" height="42" rx="11" fill="#7a4ab0"/>
+          <!-- Hands -->
+          <ellipse cx="53" cy="194" rx="11" ry="9" fill="url(#sk4b)"/>
+          <ellipse cx="147" cy="194" rx="11" ry="9" fill="url(#sk4b)"/>
+
+          <!-- NECK -->
+          <rect x="90" y="134" width="20" height="18" rx="8" fill="url(#sk4)"/>
+
+          <!-- HEAD large chibi -->
+          <ellipse cx="100" cy="93" rx="64" ry="69" fill="url(#sk4)" filter="url(#shadow4)"/>
+
+          <!-- Ears -->
+          <ellipse cx="36" cy="94" rx="11" ry="16" fill="url(#sk4)"/>
+          <ellipse cx="37" cy="94" rx="6" ry="10" fill="#eca060" opacity="0.4"/>
+          <ellipse cx="164" cy="94" rx="11" ry="16" fill="url(#sk4)"/>
+          <ellipse cx="163" cy="94" rx="6" ry="10" fill="#eca060" opacity="0.4"/>
+
+          <!-- CURLY HAIR dark detailed -->
+          <!-- Base mass -->
+          <ellipse cx="100" cy="44" rx="65" ry="34" fill="url(#hair4t)"/>
+          <rect x="35" y="46" width="130" height="26" fill="url(#hair4t)"/>
+          <!-- Curls ring -->
+          <circle cx="62" cy="52" r="18" fill="url(#hair4t)"/>
+          <circle cx="82" cy="38" r="20" fill="url(#hair4t)"/>
+          <circle cx="104" cy="32" r="20" fill="url(#hair4t)"/>
+          <circle cx="126" cy="38" r="19" fill="url(#hair4t)"/>
+          <circle cx="146" cy="52" r="18" fill="url(#hair4t)"/>
+          <circle cx="50" cy="68" r="14" fill="url(#hair4t)"/>
+          <circle cx="150" cy="68" r="14" fill="url(#hair4t)"/>
+          <!-- Curl detail top -->
+          <path d="M66 46 Q76 38 88 44" stroke="#4a2810" stroke-width="5" fill="none" opacity="0.5" stroke-linecap="round"/>
+          <path d="M94 36 Q106 29 118 36" stroke="#4a2810" stroke-width="5" fill="none" opacity="0.48" stroke-linecap="round"/>
+          <path d="M120 40 Q132 34 142 42" stroke="#4a2810" stroke-width="4.5" fill="none" opacity="0.45" stroke-linecap="round"/>
+          <!-- Curl highlights -->
+          <path d="M70 49 Q78 42 86 47" stroke="#6a3820" stroke-width="3" fill="none" opacity="0.6" stroke-linecap="round"/>
+          <path d="M100 35 Q110 29 120 35" stroke="#6a3820" stroke-width="3" fill="none" opacity="0.55" stroke-linecap="round"/>
+
+          <!-- EYEBROWS expressive -->
+          <path d="M64 77 Q78 69 94 74" stroke="#2a1808" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path d="M106 74 Q122 69 136 77" stroke="#2a1808" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+          <!-- EYES large warm chibi -->
+          <ellipse cx="80" cy="88" rx="15.5" ry="13" fill="white"/>
+          <ellipse cx="120" cy="88" rx="15.5" ry="13" fill="white"/>
+          <circle cx="80" cy="89" r="10.5" fill="#4a2808"/>
+          <circle cx="120" cy="89" r="10.5" fill="#4a2808"/>
+          <circle cx="80" cy="89" r="6" fill="#1a0804" class="eye-pupil"/>
+          <circle cx="120" cy="89" r="6" fill="#1a0804" class="eye-pupil"/>
+          <circle cx="85" cy="84" r="4.5" fill="white"/>
+          <circle cx="125" cy="84" r="4.5" fill="white"/>
+          <circle cx="76" cy="94" r="2" fill="rgba(255,255,255,0.55)"/>
+          <circle cx="116" cy="94" r="2" fill="rgba(255,255,255,0.55)"/>
+          <path d="M65 82 Q80 75 95 82" stroke="#1a0804" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M105 82 Q120 75 135 82" stroke="#1a0804" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M65 82 Q73 77 80 80" stroke="#1a0804" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path d="M105 80 Q113 77 120 80" stroke="#1a0804" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path d="M66 98 Q80 103 94 98" stroke="#906050" stroke-width="1.2" fill="none" opacity="0.45"/>
+          <path d="M106 98 Q120 103 134 98" stroke="#906050" stroke-width="1.2" fill="none" opacity="0.45"/>
+
+          <!-- NOSE -->
+          <path d="M96 106 Q93 113 87 115 Q100 120 113 115 Q107 113 104 106" fill="url(#sk4)" stroke="#c89060" stroke-width="1.2" opacity="0.5"/>
+
+          <!-- BIG JOYFUL SMILE with dimples -->
+          <path d="M76 126 Q100 148 124 126" fill="#d86858"/>
+          <path d="M76 126 Q100 144 124 126" fill="white"/>
+          <line x1="88" y1="126" x2="87" y2="140" stroke="#f0e0de" stroke-width="1.3"/>
+          <line x1="100" y1="126" x2="100" y2="144" stroke="#f0e0de" stroke-width="1.3"/>
+          <line x1="112" y1="126" x2="113" y2="140" stroke="#f0e0de" stroke-width="1.3"/>
+          <path d="M76 126 Q88 121 100 123 Q112 121 124 126" fill="none" stroke="#b04030" stroke-width="1.2" opacity="0.6"/>
+          <!-- Dimples -->
+          <circle cx="76" cy="132" r="4" fill="#e09070" opacity="0.28"/>
+          <circle cx="124" cy="132" r="4" fill="#e09070" opacity="0.28"/>
+
+          <!-- CHEEKS big happy -->
+          <ellipse cx="58" cy="112" rx="18" ry="11" fill="url(#cheek4)" filter="url(#blur5)"/>
+          <ellipse cx="142" cy="112" rx="18" ry="11" fill="url(#cheek4)" filter="url(#blur5)"/>
+        </svg>
+      </div>
       <div class="team-name">Dr. Augusto Nolasco</div>
-      <div class="team-role">Pediatric Dentist</div>
+      <div class="team-role" data-en="Pediatric Dentist" data-es="Dentista Pediátrica">Pediatric Dentist</div>
     </div>
+
   </div>
 </section>
 
+<style>
+  .chibi-avatar {
+    background: none !important;
+    padding: 0 !important;
+    font-size: 0 !important;
+    border-radius: 50% !important;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.14), 0 3px 12px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.7);
+    transition: box-shadow 0.45s cubic-bezier(0.22,1,0.36,1), transform 0.45s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .chibi-avatar:hover {
+    box-shadow: 0 28px 64px rgba(92,138,110,0.3), 0 8px 24px rgba(0,0,0,0.12);
+  }
+  .avatar-svg { width: 100%; height: 100%; display: block; }
+
+  @keyframes chibiBob {
+    0%,100% { transform: translateY(0px) rotate(0deg); }
+    30% { transform: translateY(-10px) rotate(-1deg); }
+    70% { transform: translateY(-6px) rotate(0.8deg); }
+  }
+  @keyframes blink {
+    0%,90%,100% { transform: scaleY(1); }
+    93%,96% { transform: scaleY(0.07); }
+  }
+  @keyframes lookAround {
+    0%,100% { transform: translate(0,0); }
+    25% { transform: translate(3px,1.5px); }
+    50% { transform: translate(-2px,2px); }
+    75% { transform: translate(1px,-2px); }
+  }
+  @keyframes wigglePop {
+    0%,100% { transform: rotate(0deg) scale(1); }
+    15% { transform: rotate(-6deg) scale(1.08); }
+    30% { transform: rotate(6deg) scale(1.10); }
+    45% { transform: rotate(-4deg) scale(1.07); }
+    65% { transform: rotate(3deg) scale(1.04); }
+    80% { transform: rotate(-1.5deg) scale(1.02); }
+  }
+
+  #avatar1 .avatar-svg { animation: chibiBob 3.8s ease-in-out infinite; }
+  #avatar2 .avatar-svg { animation: chibiBob 3.8s ease-in-out infinite 0.95s; }
+  #avatar3 .avatar-svg { animation: chibiBob 3.8s ease-in-out infinite 1.9s; }
+  #avatar4 .avatar-svg { animation: chibiBob 3.8s ease-in-out infinite 2.85s; }
+
+  #avatar1 .eye-pupil { animation: blink 4.5s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+  #avatar2 .eye-pupil { animation: blink 5.2s ease-in-out infinite 1.1s; transform-origin: center; transform-box: fill-box; }
+  #avatar3 .eye-pupil { animation: blink 4.8s ease-in-out infinite 0.5s; transform-origin: center; transform-box: fill-box; }
+  #avatar4 .eye-pupil { animation: blink 5.5s ease-in-out infinite 2s; transform-origin: center; transform-box: fill-box; }
+
+  .team-card:hover .chibi-avatar { animation: wigglePop 0.65s cubic-bezier(0.36,0.07,0.19,0.97) both; }
+  .team-card:hover .eye-pupil { animation: lookAround 1.3s ease-in-out infinite !important; }
+</style>
 <!-- BOOK -->
 <section id="book">
   <div>
-    <div class="section-tag">Get Started</div>
-    <h2 class="section-h2">Book Your<br/><em>Appointment</em> Today</h2>
-    <p>Ready to transform your smile? Fill out the form and our team will confirm your appointment within 24 hours — or call us directly at <strong style="color:var(--white)">(555) 123-4567</strong>.</p>
+    <div class="section-tag" data-en="Get Started" data-es="Comencemos">Get Started</div>
+    <h2 class="section-h2"><span data-en="Book Your" data-es="Reserva Tu">Book Your</span><br/><em data-en="Appointment" data-es="Cita">Appointment</em> <span data-en="Today" data-es="Hoy">Today</span></h2>
+    <p><span data-en="Ready to transform your smile? Fill out the form and our team will confirm your appointment within 24 hours — or call us directly at" data-es="¿Listo para transformar tu sonrisa? Completa el formulario y nuestro equipo confirmará tu cita en 24 horas — o llámanos directamente al">Ready to transform your smile? Fill out the form and our team will confirm your appointment within 24 hours — or call us directly at</span> <strong style="color:var(--white)">(555) 123-4567</strong>.</p>
     <div style="margin-top:2.5rem; display:flex; flex-direction:column; gap:1rem;">
       <div style="display:flex;align-items:center;gap:0.75rem;color:rgba(255,255,255,0.7);font-size:0.88rem;">
         <span style="font-size:1.1rem">📍</span> 123 Smile Avenue, Suite 200, New York, NY 10001
@@ -1085,26 +1991,26 @@
   <div class="book-form" id="bookForm">
     <div class="form-row">
       <div class="form-group">
-        <label>First Name</label>
-        <input type="text" placeholder="Jane" id="fname"/>
+        <label data-en="First Name" data-es="Nombre">First Name</label>
+        <input type="text" placeholder="Jane" data-placeholder-en="Jane" data-placeholder-es="María" id="fname"/>
       </div>
       <div class="form-group">
-        <label>Last Name</label>
-        <input type="text" placeholder="Smith" id="lname"/>
+        <label data-en="Last Name" data-es="Apellido">Last Name</label>
+        <input type="text" placeholder="Smith" data-placeholder-en="Smith" data-placeholder-es="García" id="lname"/>
       </div>
     </div>
     <div class="form-group">
-      <label>Email Address</label>
-      <input type="email" placeholder="jane@email.com" id="email"/>
+      <label data-en="Email Address" data-es="Correo Electrónico">Email Address</label>
+      <input type="email" placeholder="jane@email.com" data-placeholder-en="jane@email.com" data-placeholder-es="maria@email.com" id="email"/>
     </div>
     <div class="form-group">
-      <label>Phone Number</label>
-      <input type="tel" placeholder="(555) 000-0000" id="phone"/>
+      <label data-en="Phone Number" data-es="Teléfono">Phone Number</label>
+      <input type="tel" placeholder="(555) 000-0000" data-placeholder-en="(555) 000-0000" data-placeholder-es="(555) 000-0000" id="phone"/>
     </div>
     <div class="form-group">
-      <label>Service Needed</label>
+      <label data-en="Service Needed" data-es="Servicio Requerido">Service Needed</label>
       <select id="service">
-        <option value="">Select a service…</option>
+        <option value="" data-en="Select a service…" data-es="Selecciona un servicio…">Select a service…</option>
         <option>General Checkup & Cleaning</option>
         <option>Teeth Whitening</option>
         <option>Veneers / Cosmetic Work</option>
@@ -1116,14 +2022,14 @@
       </select>
     </div>
     <div class="form-group">
-      <label>Message (optional)</label>
-      <textarea placeholder="Anything we should know before your visit…" id="message"></textarea>
+      <label data-en="Message (optional)" data-es="Mensaje (opcional)">Message (optional)</label>
+      <textarea placeholder="Anything we should know before your visit…" data-placeholder-en="Anything we should know before your visit…" data-placeholder-es="¿Algo que debamos saber antes de tu visita?" id="message"></textarea>
     </div>
-    <button class="btn-book" onclick="submitForm()">Request Appointment →</button>
+    <button class="btn-book" onclick="submitForm()" data-en="Request Appointment →" data-es="Solicitar Cita →">Request Appointment →</button>
     <div class="success-msg" id="successMsg">
       <div class="check">✅</div>
-      <h3>Appointment Requested!</h3>
-      <p>We'll confirm your slot within 24 hours. See you soon!</p>
+      <h3 data-en="Appointment Requested!" data-es="¡Cita Solicitada!">Appointment Requested!</h3>
+      <p data-en="We'll confirm your slot within 24 hours. See you soon!" data-es="Confirmaremos tu cita en 24 horas. ¡Hasta pronto!">We'll confirm your slot within 24 hours. See you soon!</p>
     </div>
   </div>
 </section>
@@ -1133,10 +2039,10 @@
   <div class="footer-grid">
     <div class="footer-brand">
       <a href="#">Biodent <span>Dental Clinic</span></a>
-      <p>Premium dental care for every stage of life. Building confident smiles since 2009.</p>
+      <p data-en="Premium dental care for every stage of life. Building confident smiles since 2009." data-es="Atención dental premium para cada etapa de la vida. Construyendo sonrisas seguras desde 2009.">Premium dental care for every stage of life. Building confident smiles since 2009.</p>
     </div>
     <div class="footer-col">
-      <h4>Services</h4>
+      <h4 data-en="Services" data-es="Servicios">Services</h4>
       <ul>
         <li><a href="#services">General Dentistry</a></li>
         <li><a href="#services">Cosmetic Dentistry</a></li>
@@ -1146,73 +2052,787 @@
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Practice</h4>
+      <h4 data-en="Practice" data-es="Clínica">Practice</h4>
       <ul>
-        <li><a href="#why">About Us</a></li>
-        <li><a href="#team">Our Doctors</a></li>
-        <li><a href="#testimonials">Reviews</a></li>
-        <li><a href="#book">Contact</a></li>
+        <li><a href="#why" data-en="About Us" data-es="Nosotros">About Us</a></li>
+        <li><a href="#team" data-en="Our Doctors" data-es="Nuestros Médicos">Our Doctors</a></li>
+        <li><a href="#testimonials" data-en="Reviews" data-es="Reseñas">Reviews</a></li>
+        <li><a href="#book" data-en="Contact" data-es="Contacto">Contact</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Hours</h4>
+      <h4 data-en="Hours" data-es="Horarios">Hours</h4>
       <ul>
-        <li><a href="#">Mon–Fri: 8am – 7pm</a></li>
-        <li><a href="#">Saturday: 9am – 4pm</a></li>
-        <li><a href="#">Sunday: Closed</a></li>
-        <li><a href="#book" style="color:var(--sage)">Emergency: Call Us</a></li>
+        <li><a href="#" data-en="Mon–Fri: 8am – 7pm" data-es="Lun–Vie: 8am – 7pm">Mon–Fri: 8am – 7pm</a></li>
+        <li><a href="#" data-en="Saturday: 9am – 4pm" data-es="Sábado: 9am – 4pm">Saturday: 9am – 4pm</a></li>
+        <li><a href="#" data-en="Sunday: Closed" data-es="Domingo: Cerrado">Sunday: Closed</a></li>
+        <li><a href="#book" style="color:var(--sage)" data-en="Emergency: Call Us" data-es="Emergencia: Llámenos">Emergency: Call Us</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2025 Biodent Dental Clinic. All rights reserved.</p>
-    <p>Privacy Policy · Terms of Service</p>
+    <p data-en="© 2025 Biodent Dental Clinic. All rights reserved." data-es="© 2025 Biodent Dental Clinic. Todos los derechos reservados.">© 2025 Biodent Dental Clinic. All rights reserved.</p>
+    <p data-en="Privacy Policy · Terms of Service" data-es="Política de Privacidad · Términos de Servicio">Privacy Policy · Terms of Service</p>
   </div>
+
+  <!-- QR CODE SECTION -->
+  <div class="qr-section">
+    <div class="qr-inner">
+      <div class="qr-text">
+        <p class="qr-label" data-en="Scan to Visit Our Website" data-es="Escanea para Visitarnos">Scan to Visit Our Website</p>
+        <p class="qr-url">edd05-cloud.github.io/Dental-Site/</p>
+      </div>
+      <a href="https://edd05-cloud.github.io/Dental-Site/" target="_blank" class="qr-code-wrap" title="Visit Biodent Dental Clinic">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 264" width="264" height="264">
+<rect width="264" height="264" fill="white" rx="16"/>
+<rect x="16" y="16" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="24" y="16" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="32" y="16" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="40" y="16" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="48" y="16" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="56" y="16" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="64" y="16" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="88" y="16" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="96" y="16" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="112" y="16" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="120" y="16" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="128" y="16" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="136" y="16" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="144" y="16" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="168" y="16" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="192" y="16" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="200" y="16" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="208" y="16" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="216" y="16" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="224" y="16" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="232" y="16" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="240" y="16" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="16" y="24" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="64" y="24" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="96" y="24" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="104" y="24" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="120" y="24" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="128" y="24" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="136" y="24" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="152" y="24" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="160" y="24" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="168" y="24" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="176" y="24" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="192" y="24" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="240" y="24" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="16" y="32" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="32" y="32" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="40" y="32" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="48" y="32" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="64" y="32" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="80" y="32" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="104" y="32" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="112" y="32" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="160" y="32" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="176" y="32" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="192" y="32" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="208" y="32" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="216" y="32" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="224" y="32" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="240" y="32" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="16" y="40" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="32" y="40" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="40" y="40" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="48" y="40" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="64" y="40" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="88" y="40" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="96" y="40" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="112" y="40" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="120" y="40" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="128" y="40" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="160" y="40" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="192" y="40" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="208" y="40" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="216" y="40" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="224" y="40" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="240" y="40" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="16" y="48" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="32" y="48" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="40" y="48" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="48" y="48" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="64" y="48" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="88" y="48" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="96" y="48" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="104" y="48" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="136" y="48" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="152" y="48" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="160" y="48" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="168" y="48" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="192" y="48" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="208" y="48" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="216" y="48" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="224" y="48" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="240" y="48" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="16" y="56" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="64" y="56" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="88" y="56" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="96" y="56" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="136" y="56" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="144" y="56" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="152" y="56" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="168" y="56" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="176" y="56" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="192" y="56" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="240" y="56" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="16" y="64" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="24" y="64" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="32" y="64" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="40" y="64" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="48" y="64" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="56" y="64" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="64" y="64" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="80" y="64" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="96" y="64" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="112" y="64" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="128" y="64" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="144" y="64" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="160" y="64" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="176" y="64" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="192" y="64" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="200" y="64" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="208" y="64" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="216" y="64" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="224" y="64" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="232" y="64" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="240" y="64" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="80" y="72" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="96" y="72" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="112" y="72" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="120" y="72" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="128" y="72" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="136" y="72" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="152" y="72" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="176" y="72" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="16" y="80" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="24" y="80" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="32" y="80" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="48" y="80" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="56" y="80" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="64" y="80" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="72" y="80" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="80" y="80" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="96" y="80" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="104" y="80" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="120" y="80" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="144" y="80" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="152" y="80" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="176" y="80" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="184" y="80" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="192" y="80" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="200" y="80" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="208" y="80" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="224" y="80" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="232" y="80" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="240" y="80" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="16" y="88" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="24" y="88" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="40" y="88" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="48" y="88" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="80" y="88" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="144" y="88" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="152" y="88" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="160" y="88" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="176" y="88" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="192" y="88" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="200" y="88" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="216" y="88" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="240" y="88" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="16" y="96" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="24" y="96" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="48" y="96" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="56" y="96" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="64" y="96" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="72" y="96" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="104" y="96" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="112" y="96" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="128" y="96" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="144" y="96" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="176" y="96" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="184" y="96" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="192" y="96" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="208" y="96" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="224" y="96" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="232" y="96" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="240" y="96" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="32" y="104" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="72" y="104" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="80" y="104" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="88" y="104" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="104" y="104" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="120" y="104" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="128" y="104" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="136" y="104" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="144" y="104" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="152" y="104" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="160" y="104" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="176" y="104" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="200" y="104" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="232" y="104" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="24" y="112" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="40" y="112" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="64" y="112" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="104" y="112" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="120" y="112" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="152" y="112" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="168" y="112" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="176" y="112" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="192" y="112" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="200" y="112" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="216" y="112" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="232" y="112" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="240" y="112" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="72" y="120" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="88" y="120" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="112" y="120" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="120" y="120" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="128" y="120" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="144" y="120" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="152" y="120" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="184" y="120" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="192" y="120" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="200" y="120" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="216" y="120" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="240" y="120" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="32" y="128" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="48" y="128" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="64" y="128" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="72" y="128" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="80" y="128" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="96" y="128" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="144" y="128" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="152" y="128" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="160" y="128" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="176" y="128" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="184" y="128" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="208" y="128" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="216" y="128" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="232" y="128" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="240" y="128" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="24" y="136" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="32" y="136" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="40" y="136" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="72" y="136" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="80" y="136" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="96" y="136" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="112" y="136" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="120" y="136" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="144" y="136" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="152" y="136" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="168" y="136" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="176" y="136" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="216" y="136" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="232" y="136" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="16" y="144" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="24" y="144" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="32" y="144" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="40" y="144" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="48" y="144" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="56" y="144" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="64" y="144" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="88" y="144" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="96" y="144" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="120" y="144" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="136" y="144" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="144" y="144" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="152" y="144" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="160" y="144" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="176" y="144" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="184" y="144" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="192" y="144" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="216" y="144" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="232" y="144" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="240" y="144" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="24" y="152" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="40" y="152" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="48" y="152" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="56" y="152" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="80" y="152" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="120" y="152" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="144" y="152" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="176" y="152" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="184" y="152" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="192" y="152" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="216" y="152" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="224" y="152" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="240" y="152" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="16" y="160" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="40" y="160" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="48" y="160" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="56" y="160" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="64" y="160" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="88" y="160" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="152" y="160" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="192" y="160" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="208" y="160" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="232" y="160" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="240" y="160" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="24" y="168" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="72" y="168" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="80" y="168" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="88" y="168" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="104" y="168" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="112" y="168" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="120" y="168" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="128" y="168" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="136" y="168" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="144" y="168" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="152" y="168" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="168" y="168" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="176" y="168" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="192" y="168" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="216" y="168" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="232" y="168" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="16" y="176" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="32" y="176" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="64" y="176" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="72" y="176" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="80" y="176" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="104" y="176" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="112" y="176" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="120" y="176" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="128" y="176" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="144" y="176" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="152" y="176" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="176" y="176" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="184" y="176" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="192" y="176" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="200" y="176" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="208" y="176" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="80" y="184" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="112" y="184" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="144" y="184" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="176" y="184" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="208" y="184" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="224" y="184" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="232" y="184" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="240" y="184" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="16" y="192" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="24" y="192" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="32" y="192" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="40" y="192" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="48" y="192" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="56" y="192" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="64" y="192" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="96" y="192" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="112" y="192" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="120" y="192" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="144" y="192" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="160" y="192" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="168" y="192" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="176" y="192" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="192" y="192" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="208" y="192" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="216" y="192" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="232" y="192" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="240" y="192" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="16" y="200" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="64" y="200" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="88" y="200" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="96" y="200" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="120" y="200" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="128" y="200" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="136" y="200" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="144" y="200" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="152" y="200" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="160" y="200" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="176" y="200" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="208" y="200" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="216" y="200" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="232" y="200" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="240" y="200" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="16" y="208" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="32" y="208" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="40" y="208" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="48" y="208" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="64" y="208" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="80" y="208" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="88" y="208" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="96" y="208" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="104" y="208" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="112" y="208" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="128" y="208" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="144" y="208" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="152" y="208" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="176" y="208" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="184" y="208" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="192" y="208" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="200" y="208" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="208" y="208" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="16" y="216" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="32" y="216" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="40" y="216" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="48" y="216" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="64" y="216" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="136" y="216" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="144" y="216" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="176" y="216" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="200" y="216" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="208" y="216" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="224" y="216" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="232" y="216" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="240" y="216" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="16" y="224" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="32" y="224" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="40" y="224" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="48" y="224" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="64" y="224" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="88" y="224" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="96" y="224" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="128" y="224" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="152" y="224" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="168" y="224" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="200" y="224" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="208" y="224" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="216" y="224" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="240" y="224" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="16" y="232" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="64" y="232" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="88" y="232" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="104" y="232" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="112" y="232" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="120" y="232" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="144" y="232" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="152" y="232" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="160" y="232" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="168" y="232" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="176" y="232" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="192" y="232" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="232" y="232" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="16" y="240" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="24" y="240" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="32" y="240" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="40" y="240" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="48" y="240" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="56" y="240" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="64" y="240" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="80" y="240" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="88" y="240" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="104" y="240" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="112" y="240" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="120" y="240" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="128" y="240" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="136" y="240" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="144" y="240" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="152" y="240" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="160" y="240" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="168" y="240" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="176" y="240" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="192" y="240" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="200" y="240" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="208" y="240" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="232" y="240" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+<rect x="240" y="240" width="8" height="8" fill="#2a2a2a" rx="1.5"/>
+</svg>
+      </a>
+      <div class="qr-text">
+        <p class="qr-label" data-en="Share with Friends" data-es="Comparte con Amigos">Share with Friends</p>
+        <p class="qr-url" style="font-size:0.72rem;opacity:0.55;" data-en="Point your camera at the QR code" data-es="Apunta tu cámara al código QR">Point your camera at the QR code</p>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .qr-section {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 2.5rem 4rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .qr-inner {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .qr-code-wrap {
+      display: block;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 0 0 4px rgba(255,255,255,0.08), 0 8px 32px rgba(0,0,0,0.3);
+      transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.4s ease;
+      width: 150px;
+      height: 150px;
+      flex-shrink: 0;
+    }
+    .qr-code-wrap svg {
+      width: 150px !important;
+      height: 150px !important;
+    }
+    .qr-code-wrap:hover {
+      transform: scale(1.08) rotate(2deg);
+      box-shadow: 0 0 0 4px rgba(138,171,150,0.5), 0 16px 48px rgba(0,0,0,0.4);
+    }
+    .qr-text {
+      text-align: center;
+    }
+    .qr-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 0.3rem;
+    }
+    .qr-url {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.9rem;
+      color: var(--sage);
+      font-style: italic;
+    }
+    @keyframes qrPulse {
+      0%,100% { box-shadow: 0 0 0 4px rgba(138,171,150,0.1), 0 8px 32px rgba(0,0,0,0.3); }
+      50% { box-shadow: 0 0 0 8px rgba(138,171,150,0.2), 0 8px 40px rgba(0,0,0,0.35); }
+    }
+    .qr-code-wrap { animation: qrPulse 3s ease-in-out infinite; }
+    .qr-code-wrap:hover { animation: none; }
+  </style>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  // Mobile menu
+<script>
+  /* ── Custom cursor ── */
+  const dot = document.getElementById('cursor-dot');
+  const ring = document.getElementById('cursor-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+  });
+  function animRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+  document.querySelectorAll('a, button, .service-card, .team-card, .testi-card').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      dot.style.width = '16px'; dot.style.height = '16px';
+      ring.style.width = '56px'; ring.style.height = '56px';
+      ring.style.opacity = '0.25';
+    });
+    el.addEventListener('mouseleave', () => {
+      dot.style.width = '8px'; dot.style.height = '8px';
+      ring.style.width = '36px'; ring.style.height = '36px';
+      ring.style.opacity = '0.5';
+    });
+  });
+
+  /* ── Mobile menu ── */
   const menuBtn = document.getElementById('menuBtn');
   const mobileMenu = document.getElementById('mobileMenu');
   const menuClose = document.getElementById('menuClose');
   const menuLinks = document.querySelectorAll('.menu-link');
-
   menuBtn.addEventListener('click', () => mobileMenu.classList.add('open'));
   menuClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
   menuLinks.forEach(l => l.addEventListener('click', () => mobileMenu.classList.remove('open')));
 
-  // Nav shrink on scroll
+  /* ── Nav scroll behavior ── */
+  const nav = document.querySelector('nav');
   window.addEventListener('scroll', () => {
-    const nav = document.querySelector('nav');
-    nav.style.padding = window.scrollY > 60 ? '0.9rem 4rem' : '';
+    if (window.scrollY > 60) {
+      nav.style.padding = '0.85rem 4rem';
+      nav.style.boxShadow = '0 4px 30px rgba(0,0,0,0.07)';
+      nav.classList.add('scrolled');
+    } else {
+      nav.style.padding = '';
+      nav.style.boxShadow = '';
+      nav.classList.remove('scrolled');
+    }
+    // Active nav links
+    const sections = document.querySelectorAll('section[id]');
+    sections.forEach(sec => {
+      const top = sec.offsetTop - 100;
+      const bot = top + sec.offsetHeight;
+      const link = document.querySelector(`.nav-links a[href="#${sec.id}"]`);
+      if (link) {
+        if (window.scrollY >= top && window.scrollY < bot) {
+          document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+          link.classList.add('active');
+        }
+      }
+    });
   });
 
-  // Form submit
+  /* ── Scroll reveal observer ── */
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        const el = e.target;
+        const delay = el.dataset.delay || 0;
+        setTimeout(() => el.classList.add('visible'), delay);
+        revealObs.unobserve(el);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.service-card, .testi-card, .team-card, .feature-item, .why-card, .hero-stats > div').forEach((el, i) => {
+    el.classList.add('reveal');
+    el.dataset.delay = i * 80;
+    revealObs.observe(el);
+  });
+
+  /* ── Parallax hero SVG on scroll ── */
+  const heroSvg = document.querySelector('.hero-right svg');
+  if (heroSvg) {
+    window.addEventListener('scroll', () => {
+      const offset = window.scrollY * 0.18;
+      heroSvg.style.transform = `translateY(${offset}px) scale(1.02)`;
+    }, { passive: true });
+  }
+
+  /* ── Button ripple effect ── */
+  document.querySelectorAll('.btn-primary, .btn-outline, .btn-book').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      const r = document.createElement('span');
+      r.className = 'ripple';
+      const rect = this.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      r.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX-rect.left-size/2}px;top:${e.clientY-rect.top-size/2}px`;
+      this.appendChild(r);
+      setTimeout(() => r.remove(), 700);
+    });
+  });
+
+  /* ── Animated number counters ── */
+  function animateCount(el, target, suffix) {
+    let start = 0;
+    const dur = 1800;
+    const step = timestamp => {
+      if (!start) start = timestamp;
+      const progress = Math.min((timestamp - start) / dur, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      const val = Math.floor(ease * target);
+      el.textContent = val.toLocaleString() + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+  const statsObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const nums = e.target.querySelectorAll('.stat-num');
+        nums[0] && animateCount(nums[0], 15, '+');
+        nums[1] && animateCount(nums[1], 4800, '+');
+        nums[2] && animateCount(nums[2], 98, '%');
+        statsObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  const statsEl = document.querySelector('.hero-stats');
+  if (statsEl) statsObs.observe(statsEl);
+
+  /* ── Form submit ── */
   function submitForm() {
     const fname = document.getElementById('fname').value.trim();
     const email = document.getElementById('email').value.trim();
     const service = document.getElementById('service').value;
     if (!fname || !email || !service) {
-      alert('Please fill in your name, email, and select a service.');
+      // Shake animation on empty fields
+      [fname ? null : 'fname', email ? null : 'email', service ? null : 'service']
+        .filter(Boolean).forEach(id => {
+          const el = document.getElementById(id);
+          el.style.animation = 'shake 0.4s ease';
+          el.addEventListener('animationend', () => el.style.animation = '', {once:true});
+        });
       return;
     }
-    // Hide form fields, show success
     const form = document.getElementById('bookForm');
-    const inputs = form.querySelectorAll('input, select, textarea, button');
-    inputs.forEach(el => el.style.display = 'none');
-    document.querySelector('.form-row').style.display = 'none';
-    document.querySelectorAll('.form-group').forEach(el => el.style.display = 'none');
-    document.getElementById('successMsg').style.display = 'block';
+    form.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+    form.style.opacity = '0';
+    form.style.transform = 'scale(0.96)';
+    setTimeout(() => {
+      const inputs = form.querySelectorAll('input, select, textarea, button');
+      inputs.forEach(el => el.style.display = 'none');
+      document.querySelector('.form-row').style.display = 'none';
+      document.querySelectorAll('.form-group').forEach(el => el.style.display = 'none');
+      document.getElementById('successMsg').style.display = 'block';
+      form.style.opacity = '1';
+      form.style.transform = 'scale(1)';
+    }, 400);
   }
 
-  // Intersection observer for subtle fade-in on scroll
-  const observer = new IntersectionObserver((entries) => {
+  /* ── Smooth section entry (tilt on scroll) ── */
+  const sections = document.querySelectorAll('section');
+  const sectionObs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
         e.target.style.opacity = '1';
-        e.target.style.transform = 'translateY(0)';
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.05 });
+  sections.forEach(s => sectionObs.observe(s));
 
-  document.querySelectorAll('.service-card, .testi-card, .team-car
+  /* ══════════════════════════════════════
+     LANGUAGE SWITCHER
+  ══════════════════════════════════════ */
+  let currentLang = 'en';
+  const langBtn = document.getElementById('langBtn');
+  const langFlag = document.getElementById('langFlag');
+  const langLabel = document.getElementById('langLabel');
+  const overlay = document.getElementById('lang-overlay');
+  const overlayText = document.getElementById('langOverlayText');
+
+  function applyLang(lang) {
+    // Update all [data-en] / [data-es] elements
+    document.querySelectorAll('[data-en]').forEach(el => {
+      const txt = el.getAttribute('data-' + lang);
+      if (txt) el.textContent = txt;
+    });
+    // Update placeholders
+    document.querySelectorAll('[data-placeholder-' + lang + ']').forEach(el => {
+      el.placeholder = el.getAttribute('data-placeholder-' + lang);
+    });
+    // Update <option> elements
+    document.querySelectorAll('option[data-en]').forEach(el => {
+      el.textContent = el.getAttribute('data-' + lang) || el.getAttribute('data-en');
+    });
+    // Update html lang attr
+    document.documentElement.lang = lang === 'es' ? 'es' : 'en';
+    // Update button
+    if (lang === 'es') {
+      langFlag.textContent = '🇺🇸';
+      langLabel.textContent = 'EN';
+      langBtn.title = 'Switch to English';
+    } else {
+      langFlag.textContent = '🇬🇧';
+      langLabel.textContent = 'ES';
+      langBtn.title = 'Cambiar a Español';
+    }
+  }
+
+  function switchLang() {
+    const next = currentLang === 'en' ? 'es' : 'en';
+    overlayText.textContent = next === 'es' ? 'Español 🇵🇪' : 'English 🇬🇧';
+
+    // Fade in overlay
+    overlay.classList.add('show');
+
+    setTimeout(() => {
+      applyLang(next);
+      currentLang = next;
+    }, 280);
+
+    setTimeout(() => {
+      overlay.classList.remove('show');
+    }, 600);
+  }
+
+  langBtn.addEventListener('click', switchLang);
+</script>
+<style>
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    20% { transform: translateX(-8px); }
+    40% { transform: translateX(8px); }
+    60% { transform: translateX(-5px); }
+    80% { transform: translateX(5px); }
+  }
+</style></body>
+</html>
