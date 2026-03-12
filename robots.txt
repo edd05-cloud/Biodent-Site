@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Direct link to sitemap for faster indexing
+Sitemap: https://edd05-cloud.github.io/Biodent-Site/sitemap.xml
