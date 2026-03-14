@@ -1,9 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
- <url>
-  <loc>https://edd05-cloud.github.io/Biodent-Site/</loc>
-  <lastmod>2026-03-11</lastmod>
-  <changefreq>weekly</changefreq>
-  <priority>1.0</priority>
- </url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- ═══════════════════════════════════════════════
+       Biodent Clínica Odontológica — XML Sitemap
+       Site: https://edd05-cloud.github.io/Dental-Site/
+       Generated: 2026-03-14
+       Covers: DR Law 172-13, Google Search Console standards
+       ═══════════════════════════════════════════════ -->
+
+  <!-- HOMEPAGE — highest priority -->
+  <url>
+    <loc>https://edd05-cloud.github.io/Dental-Site/</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <!-- hreflang for bilingual site -->
+    <xhtml:link rel="alternate" hreflang="es" href="https://edd05-cloud.github.io/Dental-Site/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edd05-cloud.github.io/Dental-Site/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://edd05-cloud.github.io/Dental-Site/"/>
+  </url>
+
+  <!-- PRIVACY POLICY -->
+  <url>
+    <loc>https://edd05-cloud.github.io/Dental-Site/privacy-policy.html</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://edd05-cloud.github.io/Dental-Site/privacy-policy.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edd05-cloud.github.io/Dental-Site/privacy-policy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://edd05-cloud.github.io/Dental-Site/privacy-policy.html"/>
+  </url>
+
+  <!-- TERMS OF SERVICE -->
+  <url>
+    <loc>https://edd05-cloud.github.io/Dental-Site/terms-of-service.html</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://edd05-cloud.github.io/Dental-Site/terms-of-service.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://edd05-cloud.github.io/Dental-Site/terms-of-service.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://edd05-cloud.github.io/Dental-Site/terms-of-service.html"/>
+  </url>
+
 </urlset>

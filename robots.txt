@@ -1,5 +1,79 @@
+# ═══════════════════════════════════════════════════
+# robots.txt — Biodent Clínica Odontológica
+# Site: https://edd05-cloud.github.io/Dental-Site/
+# Updated: 2026-03-14
+# ═══════════════════════════════════════════════════
+
+# ── Allow all well-behaved search engine crawlers ──
 User-agent: *
 Allow: /
+Allow: /index.html
+Allow: /sitemap.xml
 
-# Direct link to sitemap for faster indexing
-Sitemap: https://edd05-cloud.github.io/Biodent-Site/sitemap.xml
+# Block legal/policy pages from being indexed
+# (They have noindex meta tag already, this is belt-and-suspenders)
+Disallow: /privacy-policy.html
+Disallow: /terms-of-service.html
+
+# Block common junk paths that don't exist but bots probe for
+Disallow: /admin/
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /.env
+Disallow: /config/
+Disallow: /cgi-bin/
+Disallow: /*.php$
+Disallow: /*.sql$
+Disallow: /*.log$
+
+# ── Google-specific rules ──
+User-agent: Googlebot
+Allow: /
+Allow: /index.html
+Disallow: /privacy-policy.html
+Disallow: /terms-of-service.html
+
+# ── Bing ──
+User-agent: Bingbot
+Allow: /
+Allow: /index.html
+Disallow: /privacy-policy.html
+Disallow: /terms-of-service.html
+
+# ── Allow Google Image crawler for photos ──
+User-agent: Googlebot-Image
+Allow: /
+
+# ── Block AI training scrapers ──
+User-agent: GPTBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: omgili
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+# ── Sitemap location ──
+Sitemap: https://edd05-cloud.github.io/Dental-Site/sitemap.xml
+
+# ── Crawl delay (be gentle on GitHub Pages free hosting) ──
+Crawl-delay: 5
