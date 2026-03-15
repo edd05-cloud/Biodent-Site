@@ -4102,10 +4102,10 @@ body.dark-mode .dark-toggle-moon { opacity: 1; }
 .sticky-cta {
   position: fixed;
   bottom: 0; left: 0; right: 0;
-  background: rgba(10,12,14,0.97);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-top: 1px solid rgba(255,255,255,0.09);
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: saturate(180%) blur(24px);
+  -webkit-backdrop-filter: saturate(180%) blur(24px);
+  border-top: 1px solid rgba(0,0,0,0.08);
   padding: 0.85rem 8%;
   display: flex;
   align-items: center;
@@ -4113,15 +4113,16 @@ body.dark-mode .dark-toggle-moon { opacity: 1; }
   gap: 1rem;
   z-index: 9900;
   transform: translateY(110%);
-  transition: transform 0.25s cubic-bezier(0.22,1,0.36,1);
+  transition: transform 0.45s cubic-bezier(0.22,1,0.36,1);
   flex-wrap: wrap;
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.06);
 }
 .sticky-cta.visible { transform: translateY(0); }
 .sticky-cta-text {
-  color: rgba(255,255,255,0.75);
+  color: var(--charcoal);
   font-size: 0.88rem;
 }
-.sticky-cta-text strong { color: var(--sage); font-weight: 600; }
+.sticky-cta-text strong { color: var(--sage-dark); font-weight: 600; }
 .sticky-cta-actions {
   display: flex;
   gap: 0.65rem;
@@ -4137,29 +4138,49 @@ body.dark-mode .dark-toggle-moon { opacity: 1; }
   border: none;
   transition: all 0.25s ease;
   text-decoration: none;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
   white-space: nowrap;
   letter-spacing: 0.02em;
+  text-align: center;
 }
 .sticky-cta-btn.primary {
   background: var(--sage-dark);
   color: white;
 }
-.sticky-cta-btn.primary:hover { background: var(--sage); }
+.sticky-cta-btn.primary:hover { background: var(--charcoal); transform: translateY(-1px); }
 .sticky-cta-btn.wa {
   background: #25d366;
   color: white;
-  box-shadow: 0 4px 16px rgba(37,211,102,0.35);
+  box-shadow: 0 4px 16px rgba(37,211,102,0.3);
 }
-.sticky-cta-btn.wa:hover { background: #1ebc58; }
+.sticky-cta-btn.wa:hover { background: #1ebc58; transform: translateY(-1px); }
 .sticky-cta-close {
-  background: none; border: none;
-  color: rgba(255,255,255,0.35);
-  cursor: pointer; font-size: 1rem;
-  flex-shrink: 0; padding: 0.2rem;
+  background: rgba(0,0,0,0.06);
+  border: none;
+  color: rgba(0,0,0,0.4);
+  cursor: pointer; font-size: 0.85rem;
+  flex-shrink: 0;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
   line-height: 1;
 }
-.sticky-cta-close:hover { color: rgba(255,255,255,0.7); }
+.sticky-cta-close:hover { background: rgba(0,0,0,0.12); color: rgba(0,0,0,0.7); }
+
+/* Dark mode sticky CTA */
+body.dark-mode .sticky-cta {
+  background: rgba(18,22,26,0.88);
+  border-top-color: rgba(255,255,255,0.08);
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.25);
+}
+body.dark-mode .sticky-cta-text { color: #e8e6e2; }
+body.dark-mode .sticky-cta-text strong { color: var(--sage); }
+body.dark-mode .sticky-cta-close { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.45); }
+body.dark-mode .sticky-cta-close:hover { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.8); }
 
 /* ── SERVICE POPULARITY BARS ── */
 .service-popularity {
